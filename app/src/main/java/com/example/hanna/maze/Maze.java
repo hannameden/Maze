@@ -24,12 +24,14 @@ public class Maze {
 
     private Random random;
 
-    private int mazeWidth = 10;
-    private int mazeHeight = 10;
+    private int mazeWidth;
+    private int mazeHeight;
 
     private boolean goalIsFound;
 
-    public Maze() {
+    public Maze(int size ) {
+        this.mazeHeight = size;
+        this.mazeWidth = size;
 
         random = new Random();
 

@@ -6,17 +6,28 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import org.w3c.dom.Text;
+
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    private Spinner spinner;
+
+    private TextView text;
+    private int size;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        text = findViewById(R.id.text);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerSize);
+        spinner = (Spinner) findViewById(R.id.spinnerSize);
+
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.sizes_array, android.R.layout.simple_spinner_item);
@@ -26,17 +37,29 @@ public class MainActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
 
-        spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            }
-        });
 
     }
 
-    public void startGame(View v){
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        Object spinnerChoice = parent.getItemAtPosition(position);
+
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    public void startGame(View v) {
+
+        String choice = spinner.getSelectedItem().toString();
+
         Intent gameIntent = new Intent(this, GameActivity.class);
+        gameIntent.putExtra( "choice", choice);
         startActivity(gameIntent);
         finish();
     }

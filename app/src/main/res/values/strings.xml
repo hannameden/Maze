@@ -2,7 +2,6 @@
     <string name="app_name">Maze</string>
 
     <string-array name="sizes_array">
-        <item>SIZE</item>
         <item>10 x 10</item>
         <item>20 x 20</item>
         <item>40 x 40</item>

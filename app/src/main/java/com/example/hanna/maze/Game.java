@@ -1,6 +1,7 @@
 package com.example.hanna.maze;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,14 +15,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private GameThread gameThread;
     private Maze maze;
 
-    public Game(Context context) {
+    public Game(Context context, int size) {
         super(context);
 
         getHolder().addCallback(this);
 
         CURRENT_CONTEXT = context;
 
-        maze = new Maze();
+        maze = new Maze(size);
         
         setFocusable(true);
     }
@@ -35,6 +36,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
 
     }
 

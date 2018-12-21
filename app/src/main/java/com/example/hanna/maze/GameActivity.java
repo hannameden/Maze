@@ -1,13 +1,31 @@
 package com.example.hanna.maze;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity {
+
+    private static final String TAG = "GameActivity";
+    private int size;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(new Game(this));
+
+         String choice = getIntent().getStringExtra("choice");
+
+        Log.d(TAG, "onCreate: " + choice);
+
+        if(choice.equals("10 x 10")){
+            size = 10;
+        }else if(choice.equals("20 x 20")){
+            size = 20;
+        }else {
+            size = 40;
+        }
+        setContentView(new Game(this, size));
     }
 }
