@@ -2,6 +2,8 @@ package com.example.hanna.maze;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -9,7 +11,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public static Context CURRENT_CONTEXT;
 
-    private Thread gameThread;
+    private GameThread gameThread;
 
     public Game(Context context) {
         super(context);
@@ -17,15 +19,15 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         getHolder().addCallback(this);
 
         CURRENT_CONTEXT = context;
-
-        gameThread = new GameThread(getHolder(), this);
-
+        
         setFocusable(true);
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-
+        gameThread = new GameThread(getHolder(), this);
+        gameThread.setRunning(true);
+        gameThread.start();
     }
 
     @Override
@@ -35,7 +37,16 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-
+        boolean retry = true;
+        while (retry) {
+            try {
+                gameThread.setRunning(false);
+                gameThread.join();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            retry = false;
+        }
     }
 
     public void update() {
@@ -46,6 +57,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-
+        canvas.drawColor(Color.WHITE);
     }
 }
