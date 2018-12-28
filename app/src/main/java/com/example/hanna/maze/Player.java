@@ -13,11 +13,18 @@ public class Player {
     public Player(){
 
 
+
+
     }
+    public void render(){
+
+    }
+
     public void update(){
         if(currentCell == goalCell){
 
-         /*   AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            /*
+            AlertDialog.Builder builder = new AlertDialog.Builder();
 
             builder.setTitle("Congratulations")
                     .setMessage("Are you sure you want to delete this entry?")

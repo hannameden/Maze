@@ -28,4 +28,5 @@ public class GameActivity extends AppCompatActivity {
         }
         setContentView(new Game(this, size));
     }
+
 }
