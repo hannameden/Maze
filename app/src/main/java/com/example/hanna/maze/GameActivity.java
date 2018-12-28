@@ -17,14 +17,14 @@ public class GameActivity extends AppCompatActivity {
 
          String choice = getIntent().getStringExtra("choice");
 
-        Log.d(TAG, "onCreate: " + choice);
+      //  Log.d(TAG, "onCreate: " + choice);
 
         if(choice.equals("10 x 10")){
             size = 10;
-        }else if(choice.equals("20 x 20")){
-            size = 20;
+        }else if(choice.equals("5 x 5")){
+            size = 5;
         }else {
-            size = 40;
+            size = 15;
         }
         setContentView(new Game(this, size));
     }

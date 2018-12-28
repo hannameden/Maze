@@ -6,7 +6,7 @@ import android.graphics.Paint;
 
 public class Cell {
 
-    public static final float CELLSIZE = 100;
+    public static final float CELLSIZE = 60;
 
     public int[] walls = {1, 1, 1, 1}; //N, S, W, E    1 = wall, 0 = no wall
 
