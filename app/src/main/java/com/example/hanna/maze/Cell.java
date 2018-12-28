@@ -10,7 +10,7 @@ public class Cell {
 
     public int[] walls = {1, 1, 1, 1}; //N, S, W, E    1 = wall, 0 = no wall
 
-    private int wallSize = 7;
+    public static final int WALLSIZE = 7;
 
     private int x, y;
     private int xPixels, yPixels;
@@ -31,24 +31,24 @@ public class Cell {
 
         //North
         if(walls[0] == 1)
-            canvas.drawRect(xPixels+wallSize, yPixels+wallSize, xPixels+CELLSIZE, yPixels, paint);
+            canvas.drawRect(xPixels+ WALLSIZE, yPixels+ WALLSIZE, xPixels+CELLSIZE, yPixels, paint);
 
         //South
         if(walls[1] == 1)
-            canvas.drawRect(xPixels + wallSize, yPixels + CELLSIZE + wallSize, xPixels + CELLSIZE, yPixels + CELLSIZE, paint);
+            canvas.drawRect(xPixels + WALLSIZE, yPixels + CELLSIZE + WALLSIZE, xPixels + CELLSIZE, yPixels + CELLSIZE, paint);
 
         //West
         if(walls[2] == 1)
-            canvas.drawRect(xPixels + wallSize, yPixels + wallSize, xPixels, yPixels + CELLSIZE, paint);
+            canvas.drawRect(xPixels + WALLSIZE, yPixels + WALLSIZE, xPixels, yPixels + CELLSIZE, paint);
 
         //East
         if(walls[3] == 1)
-            canvas.drawRect(xPixels + CELLSIZE + wallSize , yPixels + wallSize, xPixels + CELLSIZE , yPixels + CELLSIZE, paint);
+            canvas.drawRect(xPixels + CELLSIZE + WALLSIZE, yPixels + WALLSIZE, xPixels + CELLSIZE , yPixels + CELLSIZE, paint);
         
     }
 
     public void fillCell(Canvas canvas, Paint paint) {
-        canvas.drawRect(xPixels + wallSize * 2, yPixels + wallSize * 2, xPixels + CELLSIZE - wallSize, yPixels + CELLSIZE - wallSize, paint);
+        canvas.drawRect(xPixels + WALLSIZE * 2, yPixels + WALLSIZE * 2, xPixels + CELLSIZE - WALLSIZE, yPixels + CELLSIZE - WALLSIZE, paint);
 
     }
 
@@ -76,4 +76,11 @@ public class Cell {
         return y;
     }
 
+    public int getxPixels() {
+        return xPixels;
+    }
+
+    public int getyPixels() {
+        return yPixels;
+    }
 }

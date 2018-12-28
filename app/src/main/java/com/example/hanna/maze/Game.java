@@ -14,6 +14,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     private GameThread gameThread;
     private Maze maze;
+    private Player player;
 
     public Game(Context context, int size) {
         super(context);
@@ -23,7 +24,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         CURRENT_CONTEXT = context;
 
         maze = new Maze(size);
-        
+        player = new Player();
+
         setFocusable(true);
     }
 
@@ -65,5 +67,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawColor(Color.WHITE);
 
         maze.render(canvas);
+        player.render(canvas);
     }
 }
