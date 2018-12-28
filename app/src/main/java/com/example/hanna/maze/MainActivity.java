@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public static int width;
     public static int height;
 
+    public static int statusBarHeight;
+
     private Spinner spinner;
 
     private TextView text;
@@ -31,6 +33,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         width = dm.widthPixels;
         height = dm.heightPixels;
+
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if(resourceId > 0)
+            statusBarHeight = getResources().getDimensionPixelSize(resourceId);
 
         text = findViewById(R.id.text);
 

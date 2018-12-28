@@ -21,7 +21,7 @@ public class Cell {
         this.x = x;
         this.y = y;
         this.xPixels = x * Cell.CELLSIZE + MainActivity.width / 2 - Maze.cells.length * CELLSIZE / 2;
-        this.yPixels = y * Cell.CELLSIZE + MainActivity.height / 2 - Maze.cells[0].length * CELLSIZE / 2;
+        this.yPixels = y * Cell.CELLSIZE + MainActivity.height / 2 - Maze.cells[0].length * CELLSIZE / 2 - MainActivity.statusBarHeight / 2;
     }
 
     public void drawWalls(Canvas canvas) {
