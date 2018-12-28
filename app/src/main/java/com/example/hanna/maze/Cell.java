@@ -6,12 +6,14 @@ import android.graphics.Paint;
 
 public class Cell {
 
-    public static final float CELLSIZE = 60;
+    public static final int CELLSIZE = 60;
 
     public int[] walls = {1, 1, 1, 1}; //N, S, W, E    1 = wall, 0 = no wall
 
+    private int wallSize = 7;
+
     private int x, y;
-    private float xPixels, yPixels;
+    private int xPixels, yPixels;
     private boolean isVisited;
     private boolean isSolution;
 
@@ -27,29 +29,27 @@ public class Cell {
         Paint paint = new Paint();
         paint.setColor(Color.BLACK);
 
-
         //North
         if(walls[0] == 1)
-            canvas.drawRect(xPixels+5, yPixels+5, xPixels+CELLSIZE, yPixels, paint);
+            canvas.drawRect(xPixels+wallSize, yPixels+wallSize, xPixels+CELLSIZE, yPixels, paint);
 
         //South
         if(walls[1] == 1)
-            canvas.drawRect(xPixels+5, yPixels + CELLSIZE + 5, xPixels + CELLSIZE, yPixels + CELLSIZE, paint);
+            canvas.drawRect(xPixels + wallSize, yPixels + CELLSIZE + wallSize, xPixels + CELLSIZE, yPixels + CELLSIZE, paint);
 
         //West
         if(walls[2] == 1)
-            canvas.drawRect(xPixels+5, yPixels+5, xPixels, yPixels + CELLSIZE, paint);
+            canvas.drawRect(xPixels + wallSize, yPixels + wallSize, xPixels, yPixels + CELLSIZE, paint);
 
         //East
         if(walls[3] == 1)
-            canvas.drawRect(xPixels + CELLSIZE + 5 , yPixels + 5, xPixels + CELLSIZE , yPixels + CELLSIZE, paint);
+            canvas.drawRect(xPixels + CELLSIZE + wallSize , yPixels + wallSize, xPixels + CELLSIZE , yPixels + CELLSIZE, paint);
         
     }
 
-    public void fillCell(Canvas canvas) {
-        Paint paint = new Paint();
-        paint.setColor(Color.BLUE);
-        canvas.drawRect(xPixels+2, yPixels+2, CELLSIZE-5, CELLSIZE-5, paint);
+    public void fillCell(Canvas canvas, Paint paint) {
+        canvas.drawRect(xPixels + wallSize * 2, yPixels + wallSize * 2, xPixels + CELLSIZE - wallSize, yPixels + CELLSIZE - wallSize, paint);
+
     }
 
     public boolean getIsVisited() {

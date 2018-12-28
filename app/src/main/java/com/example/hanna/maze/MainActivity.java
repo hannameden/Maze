@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         PendingIntent pendingIntent = TaskStackBuilder.create(this)
                 .addNextIntentWithParentStack(gameIntent)
                 .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-        
+
         startActivity(gameIntent);
     }
 }
