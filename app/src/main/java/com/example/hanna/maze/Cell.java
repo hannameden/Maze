@@ -1,8 +1,12 @@
 package com.example.hanna.maze;
 
+import android.app.Activity;
+import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+
+import static java.security.AccessController.getContext;
 
 public class Cell {
 
@@ -20,7 +24,12 @@ public class Cell {
     public Cell(int x, int y) {
         this.x = x;
         this.y = y;
-        this.xPixels = x * Cell.CELLSIZE + MainActivity.width / 2 - Maze.cells.length * CELLSIZE / 2;
+
+        if(Game.currentConfig == Configuration.ORIENTATION_LANDSCAPE)
+            this.xPixels = x * Cell.CELLSIZE + MainActivity.width / 2 - Maze.cells.length * CELLSIZE / 2 + MainActivity.statusBarHeight / 2;
+        else
+            this.xPixels = x * Cell.CELLSIZE + MainActivity.width / 2 - Maze.cells.length * CELLSIZE / 2;
+
         this.yPixels = y * Cell.CELLSIZE + MainActivity.height / 2 - Maze.cells[0].length * CELLSIZE / 2 - MainActivity.statusBarHeight / 2;
     }
 
@@ -44,7 +53,7 @@ public class Cell {
         //East
         if(walls[3] == 1)
             canvas.drawRect(xPixels + CELLSIZE + WALLSIZE, yPixels + WALLSIZE, xPixels + CELLSIZE , yPixels + CELLSIZE, paint);
-        
+
     }
 
     public void fillCell(Canvas canvas, Paint paint) {

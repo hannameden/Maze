@@ -3,6 +3,7 @@ package com.example.hanna.maze;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -19,6 +20,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private Player player;
     private InputManager inputManager;
 
+    public static int currentConfig;
+
     private int size;
 
     public Game(Context context, int size) {
@@ -27,7 +30,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.size = size;
 
         getHolder().addCallback(this);
-        
+
         setFocusable(true);
     }
 
@@ -46,6 +49,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         MainActivity.width = dm.widthPixels;
         MainActivity.height = dm.heightPixels;
+
+        currentConfig = getResources().getConfiguration().orientation;
 
         init();
 
