@@ -20,8 +20,8 @@ public class Cell {
     public Cell(int x, int y) {
         this.x = x;
         this.y = y;
-        this.xPixels = x * Cell.CELLSIZE;
-        this.yPixels = y * Cell.CELLSIZE;
+        this.xPixels = x * Cell.CELLSIZE + MainActivity.width / 2 - Maze.cells.length * CELLSIZE / 2;
+        this.yPixels = y * Cell.CELLSIZE + MainActivity.height / 2 - Maze.cells[0].length * CELLSIZE / 2;
     }
 
     public void drawWalls(Canvas canvas) {
