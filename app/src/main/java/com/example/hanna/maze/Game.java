@@ -18,6 +18,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private GameThread gameThread;
     private Maze maze;
     private Player player;
+    private Controls controls;
     private InputManager inputManager;
 
     public static int currentConfig;
@@ -37,6 +38,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private void init(){
         maze = new Maze(size);
         player = new Player();
+        controls = new Controls();
         inputManager = new InputManager();
     }
 
@@ -90,6 +92,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         maze.render(canvas);
         player.render(canvas);
+        controls.render(canvas);
         inputManager.render(canvas);
+
     }
 }
