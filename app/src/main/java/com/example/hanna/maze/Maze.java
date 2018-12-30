@@ -29,7 +29,7 @@ public class Maze {
 
     private boolean goalIsFound;
 
-    public Maze(int size ) {
+    public Maze(int size) {
         this.mazeHeight = size;
         this.mazeWidth = size;
 
@@ -175,6 +175,12 @@ public class Maze {
             for(int y = 0; y < cells[x].length; y++)
                 cells[x][y].drawWalls(canvas);
 
+        paint.setColor(Color.BLUE);
+        startCell.fillCell(canvas, paint);
+
+        paint.setColor(Color.GREEN);
+        goalCell.fillCell(canvas, paint);
+
 
         //Solution test
 		/*
@@ -196,13 +202,15 @@ public class Maze {
 		}
 		 */
 
-        //Fill goal
-        //paint.setColor(Color.GREEN);
-        /*
-        startCell.fillCell(canvas);
+		/*
+        paint.setColor(Color.RED);
+        goalCell.fillCell(canvas, paint);
 
-        //Fill start
-        goalCell.fillCell(canvas);
+        paint.setColor(Color.GREEN);
+        startCell.fillCell(canvas, paint);
+
+        paint.setColor(Color.BLUE);
+        cells[5][0].fillCell(canvas, paint);
         */
 
     }

@@ -1,18 +1,23 @@
 package com.example.hanna.maze;
 
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    public static int width;
+    public static int height;
+
+    public static int statusBarHeight;
 
     private Spinner spinner;
 
@@ -23,6 +28,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        width = dm.widthPixels;
+        height = dm.heightPixels;
+
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if(resourceId > 0)
+            statusBarHeight = getResources().getDimensionPixelSize(resourceId);
 
         text = findViewById(R.id.text);
 
@@ -57,7 +71,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         Intent gameIntent = new Intent(this, GameActivity.class);
         gameIntent.putExtra( "choice", choice);
+
+        PendingIntent pendingIntent = TaskStackBuilder.create(this)
+                .addNextIntentWithParentStack(gameIntent)
+                .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
         startActivity(gameIntent);
-        finish();
     }
 }
