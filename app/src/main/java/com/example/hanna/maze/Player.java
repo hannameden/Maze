@@ -13,14 +13,53 @@ public class Player {
     private Cell currentCell, goalCell, startCell;
     private int x, y;
 
+    private int speed = Cell.CELLSIZE;
 
     public Player(){
+
         this.x = Maze.cells[0][0].getxPixels() + Cell.WALLSIZE;
         this.y = Maze.cells[0][0].getyPixels() + Cell.WALLSIZE;
 
         currentCell = Maze.cells[0][0];
 
     }
+
+    public void moveLeft() {
+
+        if(x > 0 && currentCell.walls[2] != 1) {
+            x -= speed;
+            currentCell = Maze.cells[currentCell.getX()-1][currentCell.getY()];
+        }
+
+    }
+
+    public void moveDown() {
+
+        if(currentCell.walls[1] != 1) {
+            y += speed;
+            currentCell = Maze.cells[currentCell.getX()][currentCell.getY()+1];
+        }
+
+    }
+
+    public void moveUp() {
+
+        if(y > 0 && currentCell.walls[0] != 1) {
+            y -= speed;
+            currentCell = Maze.cells[currentCell.getX()][currentCell.getY()-1];
+        }
+
+    }
+
+    public void moveRight() {
+
+        if(currentCell.walls[3] != 1) {
+            x += speed;
+            currentCell = Maze.cells[currentCell.getX()+1][currentCell.getY()];
+        }
+
+    }
+
     public void update(){
         if(currentCell == goalCell){
 

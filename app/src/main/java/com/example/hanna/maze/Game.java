@@ -37,7 +37,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private void init(){
         maze = new Maze(size);
         player = new Player();
-        inputManager = new InputManager();
+        inputManager = new InputManager(player);
     }
 
     @Override
@@ -53,6 +53,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         currentConfig = getResources().getConfiguration().orientation;
 
         init();
+
+        this.setOnTouchListener(inputManager);
 
         gameThread = new GameThread(getHolder(), this);
         gameThread.setRunning(true);
@@ -79,7 +81,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update() {
-
 
     }
 

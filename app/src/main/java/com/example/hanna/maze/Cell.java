@@ -44,7 +44,7 @@ public class Cell {
 
         //North
         if(walls[0] == 1)
-            canvas.drawRect(xPixels+ WALLSIZE, yPixels+ WALLSIZE, xPixels+CELLSIZE, yPixels, paint);
+            canvas.drawRect(xPixels + WALLSIZE, yPixels+ WALLSIZE, xPixels+CELLSIZE, yPixels, paint);
 
         //South
         if(walls[1] == 1)
