@@ -30,7 +30,7 @@ public class InputManager implements View.OnTouchListener {
 
         this.player = player;
 
-        controllerWidth = 75;
+        controllerWidth = MainActivity.width / 12;
         controllerHeight = controllerWidth;
 
         paint = new Paint();
@@ -41,7 +41,10 @@ public class InputManager implements View.OnTouchListener {
             leftRect = new Rect(MainActivity.width / 2 - controllerWidth * 3, MainActivity.height / 2 + (maxMazeHeight * Cell.CELLSIZE) / 2 + controllerHeight * 3, MainActivity.width / 2 - controllerWidth, MainActivity.height / 2 + (maxMazeHeight * Cell.CELLSIZE) / 2 + controllerHeight * 5);
             rightRect = new Rect(MainActivity.width / 2 + controllerWidth, MainActivity.height / 2 + (maxMazeHeight * Cell.CELLSIZE) / 2 + controllerHeight * 3, MainActivity.width / 2 + controllerWidth * 3, MainActivity.height / 2 + (maxMazeHeight * Cell.CELLSIZE) / 2 + controllerHeight * 5);
         } else if (Game.currentConfig == Configuration.ORIENTATION_LANDSCAPE) {
-
+            upRect = new Rect(controllerWidth / 2 * 3, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2 - controllerHeight, controllerWidth / 2 * 5, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2);
+            downRect = new Rect(controllerWidth / 2 * 3, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2 + controllerHeight, controllerWidth / 2 * 5, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2 + controllerHeight * 2);
+            leftRect = new Rect(controllerWidth / 2, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2, controllerWidth / 2 * 3, MainActivity.height / 2 + controllerHeight / 2 - MainActivity.statusBarHeight / 2);
+            rightRect = new Rect(controllerWidth / 2 * 5, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2, controllerWidth / 2 * 7, MainActivity.height / 2 + controllerHeight / 2 - MainActivity.statusBarHeight / 2);
         }
 
     }
@@ -52,8 +55,6 @@ public class InputManager implements View.OnTouchListener {
     }
 
     public void render(Canvas canvas) {
-
-        //canvas.drawRect(MainActivity.width / 2 - controllerWidth, MainActivity.height / 2 + (Maze.cells[0].length * Cell.CELLSIZE) / 2 + controllerHeight, MainActivity.width / 2 + controllerWidth, MainActivity.height / 2 + (Maze.cells[0].length * Cell.CELLSIZE) / 2 + controllerHeight * 3, paint);
 
         canvas.drawRect(upRect, paint);
         canvas.drawRect(downRect, paint);
