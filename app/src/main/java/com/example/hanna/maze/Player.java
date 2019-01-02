@@ -10,15 +10,16 @@ import android.os.Build;
 
 public class Player {
 
-    private Cell currentCell, goalCell, startCell;
+    public static Cell currentCell;
     private int x, y;
 
     private int speed = Cell.CELLSIZE;
 
-    public Player(){
+    public Player() {
 
         this.x = Maze.cells[0][0].getxPixels() + Cell.WALLSIZE;
         this.y = Maze.cells[0][0].getyPixels() + Cell.WALLSIZE;
+
 
         currentCell = Maze.cells[0][0];
 
@@ -26,44 +27,46 @@ public class Player {
 
     public void moveLeft() {
 
-        if(x > 0 && currentCell.walls[2] != 1) {
+        if (x > 0 && currentCell.walls[2] != 1) {
             x -= speed;
-            currentCell = Maze.cells[currentCell.getX()-1][currentCell.getY()];
+            currentCell = Maze.cells[currentCell.getX() - 1][currentCell.getY()];
         }
 
     }
 
     public void moveDown() {
 
-        if(currentCell.walls[1] != 1) {
+        if (currentCell.walls[1] != 1) {
             y += speed;
-            currentCell = Maze.cells[currentCell.getX()][currentCell.getY()+1];
+            currentCell = Maze.cells[currentCell.getX()][currentCell.getY() + 1];
         }
 
     }
 
     public void moveUp() {
 
-        if(y > 0 && currentCell.walls[0] != 1) {
+        if (y > 0 && currentCell.walls[0] != 1) {
             y -= speed;
-            currentCell = Maze.cells[currentCell.getX()][currentCell.getY()-1];
+            currentCell = Maze.cells[currentCell.getX()][currentCell.getY() - 1];
         }
 
     }
 
     public void moveRight() {
 
-        if(currentCell.walls[3] != 1) {
+        if (currentCell.walls[3] != 1) {
             x += speed;
-            currentCell = Maze.cells[currentCell.getX()+1][currentCell.getY()];
+            currentCell = Maze.cells[currentCell.getX() + 1][currentCell.getY()];
         }
 
     }
 
-    public void update(){
-        if(currentCell == goalCell){
+    public void update() {
 
-         /*   AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        /*
+        if (currentCell == goalCell) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
             builder.setTitle("Congratulations")
                     .setMessage("Are you sure you want to delete this entry?")
@@ -73,17 +76,23 @@ public class Player {
                         }
                     })
                     .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();*/
+                    .show();
 
         }
+        */
 
     }
 
-    public void render(Canvas canvas){
+    public void render(Canvas canvas) {
 
         Paint paint = new Paint();
         paint.setColor(Color.RED);
         canvas.drawRect(x + Cell.WALLSIZE, y + Cell.WALLSIZE, x + Cell.CELLSIZE - Cell.WALLSIZE * 2, y + Cell.CELLSIZE - Cell.WALLSIZE * 2, paint);
 
     }
+
+    public static void setCurrentCell(int x, int y) {
+        currentCell = Maze.cells[x][y];
+    }
+
 }

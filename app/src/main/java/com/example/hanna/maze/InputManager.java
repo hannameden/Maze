@@ -78,7 +78,6 @@ public class InputManager implements View.OnTouchListener {
             player.moveRight();
         }
 
-
         return false;
     }
 }

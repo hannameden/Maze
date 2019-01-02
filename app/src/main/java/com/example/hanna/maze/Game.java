@@ -73,6 +73,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             try {
                 gameThread.setRunning(false);
                 gameThread.join();
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

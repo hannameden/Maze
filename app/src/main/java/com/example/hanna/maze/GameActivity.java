@@ -28,4 +28,25 @@ public class GameActivity extends AppCompatActivity {
         }
         setContentView(new Game(this, size));
     }
+
+    /*
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("x", Player.currentCell.getX());
+        outState.putInt("y", Player.currentCell.getY());
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        int x = savedInstanceState.getInt("x");
+        int y = savedInstanceState.getInt("y");
+
+        Player.setCurrentCell(x, y);
+    }
+    */
 }
