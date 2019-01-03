@@ -1,42 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    >
+    android:background="@drawable/bg"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/textSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text"/>
+        android:layout_toStartOf="@+id/spinnerSize"
+        android:text="Size: "
+        android:textColor="@color/colorAccent" />
+
+
+        <Spinner
+            android:id="@+id/spinnerSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@android:drawable/btn_dropdown"
+            android:layout_marginBottom="15dp"/>
+
+    <TextView
+        android:id="@+id/textLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/spinnerSize"
+        android:text="Level: "
+        android:textColor="@color/colorAccent"
+        />
+
+        <Spinner
+            android:id="@+id/spinnerLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@android:drawable/btn_dropdown"
+            android:layout_marginBottom="20dp"/>
+
+
     <Button
-        android:text="Play"
         android:id="@+id/play_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:onClick="startGame"
+        android:text="Play"
+        />
+    <Button
+        android:id="@+id/highscore_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:onClick="startHighscore"
+        android:text="Highscore"
         />
 
-    <Spinner
-        android:id="@+id/spinnerSize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/spinnerLevel"
-        android:layout_centerHorizontal="true"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown" />
-
-    <Spinner
-        android:id="@+id/spinnerLevel"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/play_button"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown" />
-
-</RelativeLayout>
+</LinearLayout>

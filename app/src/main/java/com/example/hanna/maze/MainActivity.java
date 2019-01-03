@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         text = findViewById(R.id.text);
 
         spinnerSize = (Spinner) findViewById(R.id.spinnerSize);
-
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.sizes_array, android.R.layout.simple_spinner_item);
@@ -53,12 +52,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
         spinnerLevel = (Spinner) findViewById(R.id.spinnerLevel);
-
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
-                R.array.levels_array, android.R.layout.simple_spinner_item);
+                R.array.level_array, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinnerLevel.setAdapter(adapter2);
 
@@ -66,10 +64,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-        Object spinnerChoice = parent.getItemAtPosition(position);
-
-
 
 
     }
@@ -94,5 +88,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
         startActivity(gameIntent);
+    }
+
+    public void startHighscore(View view){
+
+        String size = spinnerSize.getSelectedItem().toString();
+
+        String level = spinnerLevel.getSelectedItem().toString();
+
+        Intent hsIntent = new Intent(this, Highscore.class);
+        hsIntent.putExtra( "size", size);
+        hsIntent.putExtra("level", level);
+
+        PendingIntent pendingIntent = TaskStackBuilder.create(this)
+                .addNextIntentWithParentStack(hsIntent)
+                .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        startActivity(hsIntent);
+
     }
 }

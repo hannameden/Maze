@@ -7,9 +7,10 @@
         <item>15 x 15</item>
     </string-array>
 
-    <string-array name="levels_array">
-        <item>1</item>
-        <item>24</item>
-        <item>33</item>
+    <string-array name="level_array">
+        <item>Easy</item>
+        <item>Lil hard</item>
+        <item>Real hard</item>
     </string-array>
+
 </resources>

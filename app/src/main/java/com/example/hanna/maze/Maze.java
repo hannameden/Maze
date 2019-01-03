@@ -24,16 +24,16 @@ public class Maze {
 
     private Random random;
 
-    private int mazeWidth, mazeHeight, level;
+    private int mazeWidth, mazeHeight;
 
     private boolean goalIsFound;
 
     public Maze(int size, int level) {
         this.mazeHeight = size;
         this.mazeWidth = size;
-        this.level = level;
 
         random = new Random();
+        random.setSeed(level);
 
         initializeCells();
 
@@ -183,15 +183,15 @@ public class Maze {
 
 
         //Solution test
-		/*
+        /*
 		for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++) {
 				if(cells[x][y].isSolution()) {
 					g.setColor(Color.MAGENTA);
 					cells[x][y].fillCell(g);
 				}
-			}
-		 */
+			}*/
+
 
         //Neighbour test
 

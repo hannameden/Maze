@@ -35,7 +35,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         this.size = size;
         this.level = level;
-        Log.d(TAG, "Game: "+ level);
 
         getHolder().addCallback(this);
 

@@ -28,12 +28,12 @@ public class GameActivity extends AppCompatActivity {
             size = 15;
         }
 
-        if(levelString.equals("1"))
-            level = 1;
-        else if(levelString.equals("24"))
+        if(levelString.equals("Easy"))
             level = 2;
+        else if(levelString.equals("Lil hard"))
+            level = 4;
         else
-            level = 3;
+            level = 1;
 
         setContentView(new Game(this, size, level));
     }
