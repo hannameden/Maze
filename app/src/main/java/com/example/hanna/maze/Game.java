@@ -8,10 +8,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
+
+    private static final String TAG = "Game";
 
     public static Context CURRENT_CONTEXT;
 
@@ -24,6 +27,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     private Paint paint;
     private int seconds, tenSecs;
+    private int playerX, playerY;
 
     private int size;
 
@@ -38,7 +42,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         CURRENT_CONTEXT = context;
 
-
         //Test
         paint = new Paint();
         paint.setTextSize(150);
@@ -48,7 +51,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     private void init(int size){
         maze = new Maze(size);
-        player = new Player(this);
+        player = new Player(this, playerX, playerY);
         inputManager = new InputManager(player);
         this.setOnTouchListener(inputManager);
     }
@@ -90,6 +93,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             }
             retry = false;
         }
+
     }
 
     public void update() {
@@ -119,14 +123,20 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void resetGame() {
-        //display.getFrame().removeKeyListener(keyManager);
-        //display.getCanvas().removeKeyListener(keyManager);
-
-
-        //this.setOnTouchListener(inputManager);
-
-        init(size);
+       
+        playerX = 0;
+        playerY = 0;
         seconds = 0;
+        init(size);
+
+    }
+
+    public void setPlayerX(int playerX){
+        this.playerX = playerX;
+    }
+
+    public void setPlayerY(int playerY){
+        this.playerY = playerY;
     }
 
 }

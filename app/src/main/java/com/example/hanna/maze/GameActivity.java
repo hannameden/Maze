@@ -12,22 +12,28 @@ public class GameActivity extends AppCompatActivity {
     private static final String TAG = "GameActivity";
     private int size;
 
+    private Game game;
+
     private int x, y;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-         String choice = getIntent().getStringExtra("choice");
+        String choice = getIntent().getStringExtra("choice");
 
-        if(choice.equals("10 x 10")){
+        if (choice.equals("10 x 10")) {
             size = 10;
-        }else if(choice.equals("5 x 5")){
+        } else if (choice.equals("5 x 5")) {
             size = 5;
-        }else {
+        } else {
             size = 15;
         }
-        setContentView(new Game(this, size));
+
+        game = new Game(this, size);
+
+        setContentView(game);
+
     }
 
 
@@ -44,17 +50,16 @@ public class GameActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        this.x = savedInstanceState.getInt("x");
-        this.y = savedInstanceState.getInt("y");
-
+        game.setPlayerX(savedInstanceState.getInt("x"));
+        game.setPlayerY(savedInstanceState.getInt("y"));
 
     }
 
-    public int getX(){
+    public int getX() {
         return x;
     }
 
-    public int getY(){
+    public int getY() {
         return y;
     }
 
