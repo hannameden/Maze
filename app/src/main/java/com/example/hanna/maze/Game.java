@@ -38,6 +38,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         CURRENT_CONTEXT = context;
 
+
         //Test
         paint = new Paint();
         paint.setTextSize(150);

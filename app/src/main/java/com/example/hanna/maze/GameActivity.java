@@ -12,6 +12,8 @@ public class GameActivity extends AppCompatActivity {
     private static final String TAG = "GameActivity";
     private int size;
 
+    private int x, y;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +30,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(new Game(this, size));
     }
 
-    /*
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -42,11 +44,18 @@ public class GameActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        int x = savedInstanceState.getInt("x");
-        int y = savedInstanceState.getInt("y");
+        this.x = savedInstanceState.getInt("x");
+        this.y = savedInstanceState.getInt("y");
 
-        Player.setCurrentCell(x, y);
+
     }
-    */
+
+    public int getX(){
+        return x;
+    }
+
+    public int getY(){
+        return y;
+    }
 
 }

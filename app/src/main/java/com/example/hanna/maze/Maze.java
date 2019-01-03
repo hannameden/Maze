@@ -33,7 +33,7 @@ public class Maze {
         this.mazeHeight = size;
         this.mazeWidth = size;
 
-        random = new Random();
+        random = new Random(1);
 
         initializeCells();
 
