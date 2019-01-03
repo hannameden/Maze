@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -15,10 +16,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public static Context CURRENT_CONTEXT;
 
+    private static final String TAG = "Game";
+
     private GameThread gameThread;
     private Maze maze;
     private Player player;
-    private Controls controls;
     private InputManager inputManager;
 
     public static int currentConfig;
@@ -26,12 +28,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private Paint paint;
     private int seconds, tenSecs;
 
-    private int size;
+    private int size, level;
 
-    public Game(Context context, int size) {
+    public Game(Context context, int size, int level) {
         super(context);
 
         this.size = size;
+        this.level = level;
+        Log.d(TAG, "Game: "+ level);
 
         getHolder().addCallback(this);
 
@@ -45,7 +49,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     private void init(){
-        maze = new Maze(size);
+        maze = new Maze(size, level);
         player = new Player();
 
         inputManager = new InputManager(player);
@@ -104,7 +108,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         maze.render(canvas);
         player.render(canvas);
-        controls.render(canvas);
         inputManager.render(canvas);
 
         canvas.drawText(seconds + "." + tenSecs,MainActivity.width / 2, MainActivity.height / 6, paint);

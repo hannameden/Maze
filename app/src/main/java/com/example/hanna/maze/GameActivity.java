@@ -9,14 +9,16 @@ import android.widget.TextView;
 public class GameActivity extends AppCompatActivity {
 
     private static final String TAG = "GameActivity";
+
     private int size;
+    private int level;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-         String choice = getIntent().getStringExtra("choice");
-
+         String choice = getIntent().getStringExtra("size");
+         String levelString = getIntent().getStringExtra("level");
 
         if(choice.equals("10 x 10")){
             size = 10;
@@ -25,7 +27,15 @@ public class GameActivity extends AppCompatActivity {
         }else {
             size = 15;
         }
-        setContentView(new Game(this, size));
+
+        if(levelString.equals("1"))
+            level = 1;
+        else if(levelString.equals("24"))
+            level = 2;
+        else
+            level = 3;
+
+        setContentView(new Game(this, size, level));
     }
 
 

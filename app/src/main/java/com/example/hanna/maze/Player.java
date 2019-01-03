@@ -21,10 +21,45 @@ public class Player {
 
     }
 
-    public void update() {
+    public void update(){
 
     }
 
+    public void moveLeft() {
+
+        if (x > 0 && currentCell.walls[2] != 1) {
+            x -= speed;
+            currentCell = Maze.cells[currentCell.getX() - 1][currentCell.getY()];
+        }
+
+    }
+
+    public void moveDown() {
+
+        if (currentCell.walls[1] != 1) {
+            y += speed;
+            currentCell = Maze.cells[currentCell.getX()][currentCell.getY() + 1];
+        }
+
+    }
+
+    public void moveUp() {
+
+        if (y > 0 && currentCell.walls[0] != 1) {
+            y -= speed;
+            currentCell = Maze.cells[currentCell.getX()][currentCell.getY() - 1];
+        }
+
+    }
+
+    public void moveRight() {
+
+        if (currentCell.walls[3] != 1) {
+            x += speed;
+            currentCell = Maze.cells[currentCell.getX() + 1][currentCell.getY()];
+        }
+
+    }
 
 
     public void render(Canvas canvas) {

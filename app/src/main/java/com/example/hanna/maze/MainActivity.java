@@ -19,7 +19,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public static int statusBarHeight;
 
-    private Spinner spinner;
+    private Spinner spinnerSize;
+    private Spinner spinnerLevel;
 
     private TextView text;
     private int size;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         text = findViewById(R.id.text);
 
-        spinner = (Spinner) findViewById(R.id.spinnerSize);
+        spinnerSize = (Spinner) findViewById(R.id.spinnerSize);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -48,7 +49,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
+        spinnerSize.setAdapter(adapter);
+
+
+        spinnerLevel = (Spinner) findViewById(R.id.spinnerLevel);
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
+                R.array.levels_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinnerLevel.setAdapter(adapter2);
 
     }
 
@@ -56,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         Object spinnerChoice = parent.getItemAtPosition(position);
+
+
 
 
     }
@@ -67,10 +81,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void startGame(View v) {
 
-        String choice = spinner.getSelectedItem().toString();
+        String size = spinnerSize.getSelectedItem().toString();
+
+        String level = spinnerLevel.getSelectedItem().toString();
 
         Intent gameIntent = new Intent(this, GameActivity.class);
-        gameIntent.putExtra( "choice", choice);
+        gameIntent.putExtra( "size", size);
+        gameIntent.putExtra("level", level);
 
         PendingIntent pendingIntent = TaskStackBuilder.create(this)
                 .addNextIntentWithParentStack(gameIntent)
