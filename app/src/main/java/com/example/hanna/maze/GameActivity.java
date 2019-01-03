@@ -55,12 +55,4 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
 }

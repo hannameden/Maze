@@ -123,7 +123,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void resetGame() {
-       
+
         playerX = 0;
         playerY = 0;
         seconds = 0;
