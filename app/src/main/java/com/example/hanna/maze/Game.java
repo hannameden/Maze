@@ -18,8 +18,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public static Context CURRENT_CONTEXT;
 
-    private static final String TAG = "Game";
-
     private GameThread gameThread;
     private Maze maze;
     private Player player;

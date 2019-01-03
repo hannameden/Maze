@@ -41,8 +41,26 @@ public class GameActivity extends AppCompatActivity {
         else
             level = 1;
 
-        setContentView(new Game(this, size, level));
+        game = new Game(this, size, level);
+
+        setContentView(game);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
+        outState.putInt("x", Player.currentCell.getX());
+        outState.putInt("y", Player.currentCell.getY());
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        game.setPlayerX(savedInstanceState.getInt("x"));
+        game.setPlayerY(savedInstanceState.getInt("y"));
+
+    }
 }
