@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "593539147135",
+    "firebase_url": "https://maze-17f47.firebaseio.com",
+    "project_id": "maze-17f47",
+    "storage_bucket": "maze-17f47.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593539147135:android:d195d29971962e73",
+        "android_client_info": {
+          "package_name": "com.example.hanna.maze"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "593539147135-8jlmpbns3lkfokutgg83kgp7pgl4vfas.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hanna.maze",
+            "certificate_hash": "7bdcae818015054033d1cab9028a5b2986eb558a"
+          }
+        },
+        {
+          "client_id": "593539147135-0p1v67tin2040c5n0tf98jv6mhpifr20.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAggUe9grQtRVz6Bo1ggJkD21xr0VT45JE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "593539147135-0p1v67tin2040c5n0tf98jv6mhpifr20.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

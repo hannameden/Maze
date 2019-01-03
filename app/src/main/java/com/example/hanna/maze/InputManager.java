@@ -24,26 +24,33 @@ public class InputManager implements View.OnTouchListener {
 
     private Rect upRect, downRect, leftRect, rightRect;
 
-    private int maxMazeHeight = 14;
-
     public InputManager(Player player) {
 
         this.player = player;
 
-        controllerWidth = MainActivity.width / 12;
+        controllerWidth = MainActivity.width / 6;
         controllerHeight = controllerWidth;
 
         paint = new Paint();
         paint.setARGB(50, 100, 100, 100);
 
         if (Game.currentConfig == Configuration.ORIENTATION_PORTRAIT) {
-            upRect = new Rect(MainActivity.width / 2 - controllerWidth, MainActivity.height / 2 + (maxMazeHeight * Cell.CELLSIZE) / 2 + controllerHeight, MainActivity.width / 2 + controllerWidth, MainActivity.height / 2 + (maxMazeHeight * Cell.CELLSIZE) / 2 + controllerHeight * 3);
-            downRect = new Rect(MainActivity.width / 2 - controllerWidth, MainActivity.height / 2 + (maxMazeHeight * Cell.CELLSIZE) / 2 + controllerHeight * 5, MainActivity.width / 2 + controllerWidth, MainActivity.height / 2 + (maxMazeHeight * Cell.CELLSIZE) / 2 + controllerHeight * 7);
-            leftRect = new Rect(MainActivity.width / 2 - controllerWidth * 3, MainActivity.height / 2 + (maxMazeHeight * Cell.CELLSIZE) / 2 + controllerHeight * 3, MainActivity.width / 2 - controllerWidth, MainActivity.height / 2 + (maxMazeHeight * Cell.CELLSIZE) / 2 + controllerHeight * 5);
-            rightRect = new Rect(MainActivity.width / 2 + controllerWidth, MainActivity.height / 2 + (maxMazeHeight * Cell.CELLSIZE) / 2 + controllerHeight * 3, MainActivity.width / 2 + controllerWidth * 3, MainActivity.height / 2 + (maxMazeHeight * Cell.CELLSIZE) / 2 + controllerHeight * 5);
+            controllerWidth = MainActivity.width / 6;
+            controllerHeight = controllerWidth;
+            //upRect = new Rect(MainActivity.width / 2 - controllerWidth, MainActivity.height / 2 + (maxMazeHeight * Cell.CELLSIZE) / 2 + controllerHeight, MainActivity.width / 2 + controllerWidth, MainActivity.height / 2 + (maxMazeHeight * Cell.CELLSIZE) / 2 + controllerHeight * 3);
+            //downRect = new Rect(MainActivity.width / 2 - controllerWidth, MainActivity.height / 2 + (maxMazeHeight * Cell.CELLSIZE) / 2 + controllerHeight * 5, MainActivity.width / 2 + controllerWidth, MainActivity.height / 2 + (maxMazeHeight * Cell.CELLSIZE) / 2 + controllerHeight * 7);
+            leftRect = new Rect(MainActivity.width / 2 - controllerWidth / 2 * 3, MainActivity.height - controllerHeight / 2 * 5, MainActivity.width / 2 - controllerWidth / 2, MainActivity.height - controllerHeight / 2 * 3);
+            rightRect = new Rect(MainActivity.width / 2 + controllerWidth / 2, MainActivity.height - controllerHeight / 2 * 5, MainActivity.width / 2 + controllerWidth / 2 * 3, MainActivity.height - controllerHeight / 2 * 3);
+            upRect = new Rect(MainActivity.width / 2 - controllerWidth / 2, MainActivity.height - controllerHeight / 2 * 7, MainActivity.width / 2 + controllerWidth / 2, MainActivity.height - controllerHeight / 2 * 5);
+            downRect = new Rect(MainActivity.width / 2 - controllerWidth / 2, MainActivity.height - controllerHeight / 2 * 3, MainActivity.width / 2 + controllerWidth / 2, MainActivity.height - controllerHeight / 2);
+
+
         } else if (Game.currentConfig == Configuration.ORIENTATION_LANDSCAPE) {
+            controllerHeight = MainActivity.height / 6;
+            controllerWidth = controllerHeight;
+
             upRect = new Rect(controllerWidth / 2 * 3, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2 - controllerHeight, controllerWidth / 2 * 5, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2);
-            downRect = new Rect(controllerWidth / 2 * 3, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2 + controllerHeight, controllerWidth / 2 * 5, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2 + controllerHeight * 2);
+            downRect = new Rect(controllerWidth / 2 * 3, MainActivity.height / 2 + controllerHeight / 2 - MainActivity.statusBarHeight / 2, controllerWidth / 2 * 5, MainActivity.height / 2 + controllerHeight / 2 * 3 - MainActivity.statusBarHeight / 2);
             leftRect = new Rect(controllerWidth / 2, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2, controllerWidth / 2 * 3, MainActivity.height / 2 + controllerHeight / 2 - MainActivity.statusBarHeight / 2);
             rightRect = new Rect(controllerWidth / 2 * 5, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2, controllerWidth / 2 * 7, MainActivity.height / 2 + controllerHeight / 2 - MainActivity.statusBarHeight / 2);
         }
