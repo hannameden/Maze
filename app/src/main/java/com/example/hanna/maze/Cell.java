@@ -26,14 +26,14 @@ public class Cell {
         this.y = y;
 
         if(Game.currentConfig == Configuration.ORIENTATION_LANDSCAPE)
-            this.xPixels = x * Cell.CELLSIZE + MainActivity.width / 2 - Maze.cells.length * CELLSIZE / 2 + MainActivity.statusBarHeight / 2;
+            this.xPixels = x * Cell.CELLSIZE + MainActivity.width - MainActivity.width / 3 - Maze.cells.length * CELLSIZE / 2 + MainActivity.statusBarHeight / 2;
         else
             this.xPixels = x * Cell.CELLSIZE + MainActivity.width / 2 - Maze.cells.length * CELLSIZE / 2;
 
         if(Game.currentConfig == Configuration.ORIENTATION_LANDSCAPE)
             this.yPixels = y * Cell.CELLSIZE + MainActivity.height / 2 - Maze.cells[0].length * CELLSIZE / 2 - MainActivity.statusBarHeight / 2;
         else
-            this.yPixels = y * Cell.CELLSIZE + MainActivity.height / 2 - Maze.cells[0].length * CELLSIZE / 2;
+            this.yPixels = y * Cell.CELLSIZE + MainActivity.height / 3 - Maze.cells[0].length * CELLSIZE / 2;
 
     }
 

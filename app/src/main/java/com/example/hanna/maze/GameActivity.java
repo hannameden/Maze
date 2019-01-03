@@ -1,5 +1,6 @@
 package com.example.hanna.maze;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,8 +17,6 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
          String choice = getIntent().getStringExtra("choice");
-
-      //  Log.d(TAG, "onCreate: " + choice);
 
         if(choice.equals("10 x 10")){
             size = 10;
@@ -49,4 +48,5 @@ public class GameActivity extends AppCompatActivity {
         Player.setCurrentCell(x, y);
     }
     */
+
 }

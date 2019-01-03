@@ -7,15 +7,22 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
+import android.view.Gravity;
+import android.widget.Toast;
 
 public class Player {
 
+    private Game game;
+
     public static Cell currentCell;
     private int x, y;
+    private boolean goalIsFound;
 
     private int speed = Cell.CELLSIZE;
 
-    public Player() {
+    public Player(Game game) {
+
+        this.game = game;
 
         this.x = Maze.cells[0][0].getxPixels() + Cell.WALLSIZE;
         this.y = Maze.cells[0][0].getyPixels() + Cell.WALLSIZE;
@@ -39,6 +46,7 @@ public class Player {
         if (currentCell.walls[1] != 1) {
             y += speed;
             currentCell = Maze.cells[currentCell.getX()][currentCell.getY() + 1];
+            checkIfGoalIsReached();
         }
 
     }
@@ -57,6 +65,7 @@ public class Player {
         if (currentCell.walls[3] != 1) {
             x += speed;
             currentCell = Maze.cells[currentCell.getX() + 1][currentCell.getY()];
+            checkIfGoalIsReached();
         }
 
     }
@@ -91,8 +100,12 @@ public class Player {
 
     }
 
-    public static void setCurrentCell(int x, int y) {
-        currentCell = Maze.cells[x][y];
+    public void checkIfGoalIsReached() {
+        if(currentCell == Maze.cells[Maze.cells.length-1][Maze.cells[0].length-1] && !goalIsFound) {
+            goalIsFound = true;
+            Toast.makeText(Game.CURRENT_CONTEXT, "Goal is found!", Toast.LENGTH_SHORT).show();
+            game.resetGame();
+        }
     }
 
 }

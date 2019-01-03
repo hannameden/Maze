@@ -49,10 +49,10 @@ public class InputManager implements View.OnTouchListener {
             controllerHeight = MainActivity.height / 6;
             controllerWidth = controllerHeight;
 
-            //upRect = new Rect(controllerWidth / 2 * 3, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2 - controllerHeight, controllerWidth / 2 * 5, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2);
-            downRect = new Rect(controllerWidth, MainActivity.height / 2 - MainActivity.statusBarHeight / 2 + controllerHeight , controllerWidth * 2, MainActivity.height / 2 - MainActivity.statusBarHeight / 2 + controllerHeight * 2);
-            //leftRect = new Rect(controllerWidth / 2, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2, controllerWidth / 2 * 3, MainActivity.height / 2 + controllerHeight / 2 - MainActivity.statusBarHeight / 2);
-            //rightRect = new Rect(controllerWidth / 2 * 5, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2, controllerWidth / 2 * 7, MainActivity.height / 2 + controllerHeight / 2 - MainActivity.statusBarHeight / 2);
+            upRect = new Rect(controllerWidth / 2 * 3, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2 - controllerHeight, controllerWidth / 2 * 5, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2);
+            downRect = new Rect(controllerWidth / 2 * 3, MainActivity.height / 2 + controllerHeight / 2 - MainActivity.statusBarHeight / 2, controllerWidth / 2 * 5, MainActivity.height / 2 + controllerHeight / 2 * 3 - MainActivity.statusBarHeight / 2);
+            leftRect = new Rect(controllerWidth / 2, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2, controllerWidth / 2 * 3, MainActivity.height / 2 + controllerHeight / 2 - MainActivity.statusBarHeight / 2);
+            rightRect = new Rect(controllerWidth / 2 * 5, MainActivity.height / 2 - controllerHeight / 2 - MainActivity.statusBarHeight / 2, controllerWidth / 2 * 7, MainActivity.height / 2 + controllerHeight / 2 - MainActivity.statusBarHeight / 2);
         }
 
     }
