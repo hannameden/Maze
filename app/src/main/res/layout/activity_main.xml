@@ -18,13 +18,13 @@
         android:textColor="@color/colorAccent" />
 
 
-        <Spinner
-            android:id="@+id/spinnerSize"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:background="@android:drawable/btn_dropdown"
-            android:layout_marginBottom="15dp"/>
+    <Spinner
+        android:id="@+id/spinnerSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:background="@android:drawable/btn_dropdown" />
 
     <TextView
         android:id="@+id/textLevel"
@@ -32,16 +32,15 @@
         android:layout_height="wrap_content"
         android:layout_toStartOf="@+id/spinnerSize"
         android:text="Level: "
-        android:textColor="@color/colorAccent"
-        />
+        android:textColor="@color/colorAccent" />
 
-        <Spinner
-            android:id="@+id/spinnerLevel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:background="@android:drawable/btn_dropdown"
-            android:layout_marginBottom="20dp"/>
+    <Spinner
+        android:id="@+id/spinnerLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@android:drawable/btn_dropdown" />
 
 
     <Button
@@ -51,8 +50,8 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:onClick="startGame"
-        android:text="Play"
-        />
+        android:text="Play" />
+
     <Button
         android:id="@+id/highscore_button"
         android:layout_width="wrap_content"
@@ -60,7 +59,6 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:onClick="startHighscore"
-        android:text="Highscore"
-        />
+        android:text="Highscore" />
 
 </LinearLayout>
