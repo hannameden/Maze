@@ -34,6 +34,7 @@ public class InputManager implements View.OnTouchListener {
         controllerHeight = controllerWidth;
 
         paint = new Paint();
+        paint.setARGB(50, 100, 100, 100);
 
         if (Game.currentConfig == Configuration.ORIENTATION_PORTRAIT) {
             upRect = new Rect(MainActivity.width / 2 - controllerWidth, MainActivity.height / 2 + (maxMazeHeight * Cell.CELLSIZE) / 2 + controllerHeight, MainActivity.width / 2 + controllerWidth, MainActivity.height / 2 + (maxMazeHeight * Cell.CELLSIZE) / 2 + controllerHeight * 3);
@@ -60,6 +61,13 @@ public class InputManager implements View.OnTouchListener {
         canvas.drawRect(downRect, paint);
         canvas.drawRect(leftRect, paint);
         canvas.drawRect(rightRect, paint);
+
+        //paint.setColor(Color.GREEN);
+
+        //canvas.drawCircle(MainActivity.width / 2, MainActivity.height - controllerHeight ,controllerHeight, paint);
+        //canvas.drawCircle(MainActivity.width / 2, MainActivity.height - controllerHeight *5 ,controllerHeight, paint);
+        //canvas.drawCircle(MainActivity.width / 2 + controllerHeight * 2, MainActivity.height - controllerHeight *3 ,controllerHeight, paint);
+        //canvas.drawCircle(MainActivity.width / 2 - controllerHeight * 2, MainActivity.height - controllerHeight *3 ,controllerHeight, paint);
 
     }
 
