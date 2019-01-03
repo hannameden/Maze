@@ -44,19 +44,19 @@ public class Cell {
 
         //North
         if(walls[0] == 1)
-            canvas.drawRect(xPixels+ WALLSIZE, yPixels+ WALLSIZE, xPixels+CELLSIZE, yPixels, paint);
+            canvas.drawRect(xPixels, yPixels + WALLSIZE, xPixels + CELLSIZE, yPixels, paint);
 
         //South
         if(walls[1] == 1)
-            canvas.drawRect(xPixels + WALLSIZE, yPixels + CELLSIZE + WALLSIZE, xPixels + CELLSIZE, yPixels + CELLSIZE, paint);
+            canvas.drawRect(xPixels, yPixels + CELLSIZE + WALLSIZE, xPixels + CELLSIZE + WALLSIZE, yPixels + CELLSIZE, paint);
 
         //West
         if(walls[2] == 1)
-            canvas.drawRect(xPixels + WALLSIZE, yPixels + WALLSIZE, xPixels, yPixels + CELLSIZE, paint);
+            canvas.drawRect(xPixels, yPixels + CELLSIZE, xPixels + WALLSIZE, yPixels, paint);
 
         //East
         if(walls[3] == 1)
-            canvas.drawRect(xPixels + CELLSIZE + WALLSIZE, yPixels + WALLSIZE, xPixels + CELLSIZE , yPixels + CELLSIZE, paint);
+            canvas.drawRect(xPixels + CELLSIZE, yPixels + CELLSIZE, xPixels + CELLSIZE + WALLSIZE, yPixels, paint);
 
     }
 

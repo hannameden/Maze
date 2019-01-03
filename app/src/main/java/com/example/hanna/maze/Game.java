@@ -23,6 +23,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public static int currentConfig;
 
+    private Paint paint;
+    private int seconds, tenSecs;
+
     private int size;
 
     public Game(Context context, int size) {
@@ -33,14 +36,20 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         getHolder().addCallback(this);
 
         setFocusable(true);
+
+        //Test
+        paint = new Paint();
+        paint.setTextSize(150);
+        paint.setTextAlign(Paint.Align.CENTER);
+
     }
 
     private void init(){
         maze = new Maze(size);
         player = new Player();
-        controls = new Controls();
-        inputManager = new InputManager();
-    }
+
+        inputManager = new InputManager(player);
+  }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
@@ -55,6 +64,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         currentConfig = getResources().getConfiguration().orientation;
 
         init();
+
+        this.setOnTouchListener(inputManager);
 
         gameThread = new GameThread(getHolder(), this);
         gameThread.setRunning(true);
@@ -73,6 +84,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             try {
                 gameThread.setRunning(false);
                 gameThread.join();
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -95,5 +107,17 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         controls.render(canvas);
         inputManager.render(canvas);
 
+        canvas.drawText(seconds + "." + tenSecs,MainActivity.width / 2, MainActivity.height / 6, paint);
+
     }
+
+    public void setSeconds(int seconds){
+        this.seconds = seconds;
+
+    }
+
+    public void setTenSecs(int tenSecs){
+        this.tenSecs = tenSecs;
+    }
+
 }

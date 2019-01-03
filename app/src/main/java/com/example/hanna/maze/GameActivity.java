@@ -17,7 +17,6 @@ public class GameActivity extends AppCompatActivity {
 
          String choice = getIntent().getStringExtra("choice");
 
-      //  Log.d(TAG, "onCreate: " + choice);
 
         if(choice.equals("10 x 10")){
             size = 10;
@@ -28,5 +27,27 @@ public class GameActivity extends AppCompatActivity {
         }
         setContentView(new Game(this, size));
     }
+
+
+    /*
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("x", Player.currentCell.getX());
+        outState.putInt("y", Player.currentCell.getY());
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        int x = savedInstanceState.getInt("x");
+        int y = savedInstanceState.getInt("y");
+
+        Player.setCurrentCell(x, y);
+    }
+    */
 
 }
