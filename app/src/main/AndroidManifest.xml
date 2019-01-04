@@ -22,6 +22,11 @@
 
         </activity>
 
+        <activity android:name="com.example.hanna.maze.HighscoreActivity"
+            android:parentActivityName="com.example.hanna.maze.MainActivity">
+
+        </activity>
+
     </application>
 
 </manifest>

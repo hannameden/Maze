@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,6 +12,12 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -43,14 +50,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         CURRENT_CONTEXT = context;
 
-        //Test
         paint = new Paint();
         paint.setTextSize(150);
         paint.setTextAlign(Paint.Align.CENTER);
 
     }
-    private void init(int size){
-        maze = new Maze(size,level);
+
+    private void init(int size) {
+        maze = new Maze(size, level);
         player = new Player(this, playerX, playerY);
         inputManager = new InputManager(player);
         this.setOnTouchListener(inputManager);
@@ -61,7 +68,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         DisplayMetrics dm = new DisplayMetrics();
 
-        ((Activity)getContext()).getWindowManager().getDefaultDisplay().getMetrics(dm);
+        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(dm);
 
         MainActivity.width = dm.widthPixels;
         MainActivity.height = dm.heightPixels;
@@ -110,16 +117,23 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         player.render(canvas);
         inputManager.render(canvas);
 
-        //canvas.drawText(seconds + "." + tenSecs,MainActivity.width / 2, MainActivity.height / 6, paint);
+        /*
+
+        if (currentConfig == Configuration.ORIENTATION_PORTRAIT)
+            canvas.drawText(seconds + "." + tenSecs, MainActivity.width / 2, MainActivity.height / 10, paint);
+        else
+            canvas.drawText(seconds + "." + tenSecs, MainActivity.width - MainActivity.width / 12, MainActivity.height / 2, paint);
+
+            */
 
     }
 
-    public void setSeconds(int seconds){
+    public void setSeconds(int seconds) {
         this.seconds = seconds;
 
     }
 
-    public void setTenSecs(int tenSecs){
+    public void setTenSecs(int tenSecs) {
         this.tenSecs = tenSecs;
     }
 
@@ -132,12 +146,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
-    public void setPlayerX(int playerX){
+    public void setPlayerX(int playerX) {
         this.playerX = playerX;
     }
 
-    public void setPlayerY(int playerY){
+    public void setPlayerY(int playerY) {
         this.playerY = playerY;
     }
+
+
 
 }
