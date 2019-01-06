@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-
     }
 
     @Override
@@ -92,13 +91,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void startHighscore(View view){
 
-        String size = spinnerSize.getSelectedItem().toString();
-
-        String level = spinnerLevel.getSelectedItem().toString();
-
-        Intent hsIntent = new Intent(this, Highscore.class);
-        hsIntent.putExtra( "size", size);
-        hsIntent.putExtra("level", level);
+        Intent hsIntent = new Intent(this, HighscoreActivity.class);
 
         PendingIntent pendingIntent = TaskStackBuilder.create(this)
                 .addNextIntentWithParentStack(hsIntent)
