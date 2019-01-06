@@ -1,5 +1,8 @@
 package com.example.hanna.maze;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -89,9 +92,40 @@ public class Player {
     public void checkIfGoalIsReached() {
         if (currentCell == Maze.cells[Maze.cells.length - 1][Maze.cells[0].length - 1] && !goalIsFound) {
             goalIsFound = true;
-            Toast.makeText(Game.CURRENT_CONTEXT, "Goal is found!", Toast.LENGTH_SHORT).show();
+
+            playerWins(game.CURRENT_CONTEXT);
+
+
             game.resetGame();
         }
+    }
+    public void playerWins(Context context){
+
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+        builder1.setMessage("Congratulations! Your time: " + game.getTime() );
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+
+        Toast.makeText(Game.CURRENT_CONTEXT, "Goal is found!", Toast.LENGTH_SHORT).show();
+
     }
 
     public static void setCurrentCell(int x, int y) {
