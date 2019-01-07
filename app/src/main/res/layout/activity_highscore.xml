@@ -1,13 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/highscore_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="High score"
+        android:textSize="50sp"
+        android:layout_centerHorizontal="true"/>
 
+    <TextView
+        android:id="@+id/rank_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rank"
+        android:textSize="20sp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/highscore_title"/>
 
+    <TextView
+        android:id="@+id/player_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/highscore_title"/>
 
+    <TextView
+        android:id="@+id/player_time_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time"
+        android:textSize="20sp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/highscore_title"/>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rank_text"/>
 
-
-
-
-</LinearLayout>
+</RelativeLayout>
