@@ -1,31 +1,19 @@
 package com.example.hanna.maze;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class HighscoreActivity extends AppCompatActivity {
 
@@ -91,6 +79,15 @@ public class HighscoreActivity extends AppCompatActivity {
 
         Highscore highscore2 = new Highscore(2, "Niklas Nordgren", 16.2);
         databaseReference.child("highscore").child("2").setValue(highscore2);
+
+        Highscore highscore3 = new Highscore(3, "Niklas2 Nordgren", 17.2);
+        databaseReference.child("highscore").child("3").setValue(highscore3);
+
+        Highscore highscore4 = new Highscore(4, "Niklas3 Nordgren", 18.2);
+        databaseReference.child("highscore").child("4").setValue(highscore4);
+
+        Highscore highscore5 = new Highscore(5, "Niklas4 Nordgren", 19.2);
+        databaseReference.child("highscore").child("5").setValue(highscore5);
 
     }
 

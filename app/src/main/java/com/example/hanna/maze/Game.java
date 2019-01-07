@@ -8,6 +8,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -38,6 +41,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     private int size, level;
 
+    private StaticLayout staticLayout;
+
+    private String timer;
+    private float xTimerPlacement;
+    private float yTimerPlacement;
+
     public Game(Context context, int size, int level) {
         super(context);
 
@@ -51,8 +60,16 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         CURRENT_CONTEXT = context;
 
         paint = new Paint();
-        paint.setTextSize(150);
+        paint.setTextSize(100);
         paint.setTextAlign(Paint.Align.CENTER);
+        paint.setStyle(Paint.Style.FILL);
+
+        // Test
+
+        timer = "0.0 s";
+
+        paint.setAntiAlias(true);
+
 
     }
 
@@ -74,6 +91,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         MainActivity.height = dm.heightPixels;
 
         currentConfig = getResources().getConfiguration().orientation;
+
+        if (currentConfig == Configuration.ORIENTATION_PORTRAIT) {
+            xTimerPlacement = MainActivity.width / 2;
+            yTimerPlacement = MainActivity.height / 10;
+        } else {
+            xTimerPlacement = MainActivity.width - MainActivity.width / 14;
+            yTimerPlacement = MainActivity.height / 2;
+        }
 
         init(size);
 
@@ -105,6 +130,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public void update() {
 
+        timer = seconds + "." + tenSecs + " s";
 
     }
 
@@ -117,14 +143,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         player.render(canvas);
         inputManager.render(canvas);
 
-        /*
-
         if (currentConfig == Configuration.ORIENTATION_PORTRAIT)
-            canvas.drawText(seconds + "." + tenSecs, MainActivity.width / 2, MainActivity.height / 10, paint);
+            canvas.drawText(timer, xTimerPlacement, yTimerPlacement, paint);
         else
-            canvas.drawText(seconds + "." + tenSecs, MainActivity.width - MainActivity.width / 12, MainActivity.height / 2, paint);
-
-            */
+            canvas.drawText(timer, xTimerPlacement, yTimerPlacement, paint);
 
     }
 
@@ -153,7 +175,5 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public void setPlayerY(int playerY) {
         this.playerY = playerY;
     }
-
-
 
 }
