@@ -101,11 +101,12 @@ public class Player {
     }
     public void playerWins(Context context){
 
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-        builder1.setMessage("Congratulations! Your time: " + game.getTime() );
-        builder1.setCancelable(true);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("Congratulations! Your time: " + game.getTime() );
+        builder.setCancelable(false);
 
-        builder1.setPositiveButton(
+        builder.setNeutralButton("OK",null);
+        builder.setPositiveButton(
                 "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -113,7 +114,7 @@ public class Player {
                     }
                 });
 
-        builder1.setNegativeButton(
+        builder.setNegativeButton(
                 "No",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -121,10 +122,21 @@ public class Player {
                     }
                 });
 
-        AlertDialog alert11 = builder1.create();
-        alert11.show();
+        AlertDialog alert = builder.create();
+        alert.show();
 
-        Toast.makeText(Game.CURRENT_CONTEXT, "Goal is found!", Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
+        builder.setTitle("AlertDialog");
+        builder.setMessage("Would you like to continue learning how to use Android alerts?");
+
+
+        // add the buttons
+        builder.setPositiveButton("Continue", null);
+        builder.setNegativeButton("Cancel", null);
+
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
     }
 

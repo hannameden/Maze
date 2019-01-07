@@ -74,8 +74,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         MainActivity.height = dm.heightPixels;
 
         currentConfig = getResources().getConfiguration().orientation;
-        if(currentConfig == Configuration.ORIENTATION_LANDSCAPE)
-
+        if (currentConfig == Configuration.ORIENTATION_LANDSCAPE){
+              //Fixa liggande bakgrundsbild
+        }
 
         init(size);
 
@@ -120,10 +121,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         inputManager.render(canvas);
 
 
-        canvas.drawText(seconds + "." + tenSecs,MainActivity.width / 2, MainActivity.height / 6, paint);
+        canvas.drawText(seconds + "." + tenSecs, MainActivity.width / 2, MainActivity.height / 6, paint);
 
     }
-    public String getTime(){
+
+    public String getTime() {
 
         /*
 
@@ -133,7 +135,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             canvas.drawText(seconds + "." + tenSecs, MainActivity.width - MainActivity.width / 12, MainActivity.height / 2, paint);
 
             */
-        return (seconds+ "." + tenSecs + " s");
+        return (seconds + "." + tenSecs + " s");
     }
 
     public void setSeconds(int seconds) {
