@@ -81,4 +81,7 @@ public class GameThread extends Thread {
         this.running = running;
     }
 
+    public void resetSeconds(){
+        seconds = 0;
+    }
 }
