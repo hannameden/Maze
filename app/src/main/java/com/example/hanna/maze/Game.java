@@ -91,9 +91,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         MainActivity.height = dm.heightPixels;
 
         currentConfig = getResources().getConfiguration().orientation;
-        if(currentConfig == Configuration.ORIENTATION_LANDSCAPE)
-
-
+     
         if (currentConfig == Configuration.ORIENTATION_PORTRAIT) {
             xTimerPlacement = MainActivity.width / 2;
             yTimerPlacement = MainActivity.height / 10;
@@ -144,7 +142,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         maze.render(canvas);
         player.render(canvas);
         inputManager.render(canvas);
-        
+
         canvas.drawText(seconds + "." + tenSecs,MainActivity.width / 2, MainActivity.height / 6, paint);
 
     }
