@@ -91,13 +91,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         MainActivity.height = dm.heightPixels;
 
         currentConfig = getResources().getConfiguration().orientation;
-     
+
         if (currentConfig == Configuration.ORIENTATION_PORTRAIT) {
             xTimerPlacement = MainActivity.width / 2;
-            yTimerPlacement = MainActivity.height / 10;
+            yTimerPlacement = MainActivity.height / 12;
         } else {
-            xTimerPlacement = MainActivity.width - MainActivity.width / 14;
-            yTimerPlacement = MainActivity.height / 2;
+            xTimerPlacement = MainActivity.width / 3;
+            yTimerPlacement = MainActivity.height / 8;
         }
 
         init(size);
@@ -143,7 +143,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         player.render(canvas);
         inputManager.render(canvas);
 
-        canvas.drawText(seconds + "." + tenSecs,MainActivity.width / 2, MainActivity.height / 6, paint);
+        canvas.drawText(seconds + "." + tenSecs,xTimerPlacement, yTimerPlacement, paint);
 
     }
     public String getTime(){
