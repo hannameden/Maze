@@ -69,7 +69,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         paint.setStyle(Paint.Style.FILL);
 
         // Test
-        timer = "0.0 s";
+        //timer = "0.0 s";
 
         paint.setAntiAlias(true);
 
@@ -145,11 +145,15 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         player.render(canvas);
         inputManager.render(canvas);
 
-        canvas.drawText(seconds + "." + tenSecs,xTimerPlacement, yTimerPlacement, paint);
+        canvas.drawText(timer, xTimerPlacement, yTimerPlacement, paint);
 
     }
     public String getTime() {
-        return (seconds + "." + tenSecs + " s");
+        return timer;
+    }
+
+    public void setTime(String timer) {
+        this.timer = timer;
     }
 
     public void setSeconds(int seconds) {

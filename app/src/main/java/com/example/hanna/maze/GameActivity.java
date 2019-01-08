@@ -53,6 +53,7 @@ public class GameActivity extends AppCompatActivity {
 
         outState.putInt("x", Player.currentCell.getX());
         outState.putInt("y", Player.currentCell.getY());
+        outState.putString("timer", game.getTime());
 
     }
 
@@ -62,6 +63,7 @@ public class GameActivity extends AppCompatActivity {
 
         game.setPlayerX(savedInstanceState.getInt("x"));
         game.setPlayerY(savedInstanceState.getInt("y"));
+        game.setTime(savedInstanceState.getString("timer"));
 
     }
 
