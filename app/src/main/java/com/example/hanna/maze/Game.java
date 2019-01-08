@@ -39,7 +39,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     private long timer;
     private long now;
-    private long lastTime = System.nanoTime();
+    private long lastTime;
 
     public Game(Context context, GameActivity gameActivity, int size, int level) {
         super(context);
@@ -69,7 +69,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.setOnTouchListener(inputManager);
 
         lastTime = System.nanoTime();
-
+        
         gameThread = new GameThread(getHolder(), this);
         gameThread.setRunning(true);
         gameThread.start();
