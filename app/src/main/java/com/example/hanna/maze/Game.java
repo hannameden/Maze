@@ -1,6 +1,7 @@
 package com.example.hanna.maze;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -62,7 +63,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         inputManager = new InputManager(player);
         this.setOnTouchListener(inputManager);
     }
-
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
 
@@ -126,15 +126,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public String getTime() {
-
-        /*
-
-        if (currentConfig == Configuration.ORIENTATION_PORTRAIT)
-            canvas.drawText(seconds + "." + tenSecs, MainActivity.width / 2, MainActivity.height / 10, paint);
-        else
-            canvas.drawText(seconds + "." + tenSecs, MainActivity.width - MainActivity.width / 12, MainActivity.height / 2, paint);
-
-            */
         return (seconds + "." + tenSecs + " s");
     }
 
@@ -163,5 +154,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public void setPlayerY(int playerY) {
         this.playerY = playerY;
+    }
+
+    public void setRunning(boolean val){
+        gameThread.setRunning(val);
     }
 }

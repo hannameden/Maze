@@ -1,6 +1,8 @@
 package com.example.hanna.maze;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,7 +27,6 @@ public class GameActivity extends AppCompatActivity {
          String choice = getIntent().getStringExtra("size");
          String levelString = getIntent().getStringExtra("level");
 
-
         if (choice.equals("10 x 10")) {
             size = 10;
         } else if (choice.equals("5 x 5")) {
@@ -35,7 +36,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
         if(levelString.equals("Easy"))
-            level = 2;
+            level = 3;
         else if(levelString.equals("Lil hard"))
             level = 4;
         else
