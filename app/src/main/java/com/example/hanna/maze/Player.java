@@ -24,7 +24,9 @@ public class Player {
     public static Cell currentCell;
     private int x, y;
     private boolean goalIsFound;
-    public String name;
+
+    private String playerName;
+    private String playerTime;
 
     private int speed = Cell.CELLSIZE;
 
@@ -102,22 +104,23 @@ public class Player {
         final EditText input = new EditText(game.getContext());
         input.setInputType(InputType.TYPE_CLASS_TEXT );
 
+        playerTime = game.getTime();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(game.getContext());
         builder.setCancelable(false);
         builder.setTitle("Congratulations! ")
-                .setMessage("Your time is " + game.getTime() + "\nPlease write in your name to get into the scoreboard!")
+                .setMessage("Your time is " + playerTime + "\nPlease write in your name to get into the scoreboard!")
                 .setView(input)
                 .setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                 name = input.getText().toString();
-                 game.resetGame();
+                 playerName = input.getText().toString();
+                 saveResultToDatabase(playerName, playerTime);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                
 
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(game.getContext());
                 builder2.setCancelable(false)
@@ -137,8 +140,6 @@ public class Player {
                 });
                 builder2.show();
 
-
-
             }
         });
 
@@ -149,5 +150,11 @@ public class Player {
 
     public static void setCurrentCell(int x, int y) {
         currentCell = Maze.cells[x][y];
+    }
+
+    private void saveResultToDatabase(String playerName, String playerTime) {
+
+        //Compare with current database results and insert at correct position
+
     }
 }
