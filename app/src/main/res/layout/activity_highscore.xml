@@ -11,6 +11,60 @@
         android:textSize="50sp"
         android:layout_centerHorizontal="true"/>
 
+    <Button
+        android:id="@+id/button_level_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Level 1"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/highscore_title"
+        android:onClick="onClickButtonLevel1"/>
+
+    <Button
+        android:id="@+id/button_level_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Level 2"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/highscore_title"
+        android:onClick="onClickButtonLevel2"/>
+
+    <Button
+        android:id="@+id/button_level_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Level 3"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/highscore_title"
+        android:onClick="onClickButtonLevel3"/>
+
+    <Button
+        android:id="@+id/button_5x5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5x5"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/button_level_1"
+        android:onClick="onClickButton5x5"/>
+
+    <Button
+        android:id="@+id/button_10x10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10x10"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/button_level_2"
+        android:onClick="onClickButton10x10"/>
+
+    <Button
+        android:id="@+id/button_15x15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="15x15"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/button_level_3"
+        android:onClick="onClickButton15x15"/>
+
     <TextView
         android:id="@+id/rank_text"
         android:layout_width="wrap_content"
@@ -18,7 +72,8 @@
         android:text="Rank"
         android:textSize="20sp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/highscore_title"/>
+        android:layout_below="@id/button_5x5"
+        android:onClick="onClickButton15x15"/>
 
     <TextView
         android:id="@+id/player_name_text"
@@ -27,7 +82,7 @@
         android:text="Player"
         android:textSize="20sp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/highscore_title"/>
+        android:layout_below="@id/button_10x10"/>
 
     <TextView
         android:id="@+id/player_time_text"
@@ -36,7 +91,7 @@
         android:text="Time"
         android:textSize="20sp"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/highscore_title"/>
+        android:layout_below="@id/button_15x15"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"

@@ -1,10 +1,14 @@
 package com.example.hanna.maze;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,10 +31,36 @@ public class HighscoreActivity extends AppCompatActivity {
 
     private DatabaseReference databaseReference;
 
+    private boolean isButtonLevel1Pressed, isButtonLevel2Pressed, isButtonLevel3Pressed;
+    private boolean isButton5x5Pressed, isButton10x10Pressed, isButton15x15Pressed;
+
+    private Button buttonLevel1, buttonLevel2, buttonLevel3;
+    private Button button5x5, button10x10, button15x15;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscore);
+
+        buttonLevel1 = (Button) findViewById(R.id.button_level_1);
+        buttonLevel2 = (Button) findViewById(R.id.button_level_2);
+        buttonLevel3 = (Button) findViewById(R.id.button_level_3);
+
+        button5x5 = (Button) findViewById(R.id.button_5x5);
+        button10x10 = (Button) findViewById(R.id.button_10x10);
+        button15x15 = (Button) findViewById(R.id.button_15x15);
+
+        buttonLevel1.setBackgroundResource(android.R.drawable.btn_default);
+        button5x5.setBackgroundResource(android.R.drawable.btn_default);
+
+        buttonLevel2.setBackgroundResource(android.R.drawable.btn_default);
+        buttonLevel3.setBackgroundResource(android.R.drawable.btn_default);
+
+        button10x10.setBackgroundResource(android.R.drawable.btn_default);
+        button15x15.setBackgroundResource(android.R.drawable.btn_default);
+
+        buttonLevel1.getBackground().setColorFilter(buttonLevel1.getContext().getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.MULTIPLY);
+        button5x5.getBackground().setColorFilter(button5x5.getContext().getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.MULTIPLY);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -88,8 +118,70 @@ public class HighscoreActivity extends AppCompatActivity {
 
         Highscore highscore5 = new Highscore(5, "Niklas4 Nordgren", 19.2);
         databaseReference.child("highscore").child("5").setValue(highscore5);
-
     }
 
+    public void onClickButtonLevel1(View v){
+
+        isButtonLevel1Pressed = true;
+        isButtonLevel2Pressed = false;
+        isButtonLevel3Pressed = false;
+
+        buttonLevel1.getBackground().setColorFilter(buttonLevel1.getContext().getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.MULTIPLY);
+        buttonLevel2.getBackground().clearColorFilter();
+        buttonLevel3.getBackground().clearColorFilter();
+    }
+
+    public void onClickButtonLevel2(View v){
+
+        isButtonLevel1Pressed = false;
+        isButtonLevel2Pressed = true;
+        isButtonLevel3Pressed = false;
+
+        buttonLevel2.getBackground().setColorFilter(buttonLevel1.getContext().getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.MULTIPLY);
+        buttonLevel1.getBackground().clearColorFilter();
+        buttonLevel3.getBackground().clearColorFilter();
+    }
+
+    public void onClickButtonLevel3(View v){
+
+        isButtonLevel1Pressed = false;
+        isButtonLevel2Pressed = false;
+        isButtonLevel3Pressed = true;
+
+        buttonLevel3.getBackground().setColorFilter(buttonLevel1.getContext().getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.MULTIPLY);
+        buttonLevel1.getBackground().clearColorFilter();
+        buttonLevel2.getBackground().clearColorFilter();
+    }
+
+    public void onClickButton5x5(View v){
+
+        isButton5x5Pressed = true;
+        isButton10x10Pressed = false;
+        isButton15x15Pressed = false;
+
+        button5x5.getBackground().setColorFilter(buttonLevel1.getContext().getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.MULTIPLY);
+        button10x10.getBackground().clearColorFilter();
+        button15x15.getBackground().clearColorFilter();
+    }
+
+    public void onClickButton10x10(View v){
+        isButton5x5Pressed = false;
+        isButton10x10Pressed = true;
+        isButton15x15Pressed = false;
+
+        button10x10.getBackground().setColorFilter(buttonLevel1.getContext().getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.MULTIPLY);
+        button5x5.getBackground().clearColorFilter();
+        button15x15.getBackground().clearColorFilter();
+    }
+
+    public void onClickButton15x15(View v){
+        isButton5x5Pressed = false;
+        isButton10x10Pressed = false;
+        isButton15x15Pressed = true;
+
+        button15x15.getBackground().setColorFilter(buttonLevel1.getContext().getResources().getColor(R.color.colorDarkGray), PorterDuff.Mode.MULTIPLY);
+        button5x5.getBackground().clearColorFilter();
+        button10x10.getBackground().clearColorFilter();
+    }
 
 }
