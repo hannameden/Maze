@@ -42,7 +42,7 @@ public class GameActivity extends AppCompatActivity {
         else
             level = 1;
 
-        game = new Game(this, size, level);
+        game = new Game(this, this, size, level);
 
         setContentView(game);
     }
@@ -63,5 +63,10 @@ public class GameActivity extends AppCompatActivity {
         game.setPlayerX(savedInstanceState.getInt("x"));
         game.setPlayerY(savedInstanceState.getInt("y"));
 
+    }
+
+    public void sendToMainActivity(){
+        Intent mainIntent = new Intent(this, MainActivity.class);
+        startActivity(mainIntent);
     }
 }

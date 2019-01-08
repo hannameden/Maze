@@ -29,6 +29,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public static Context CURRENT_CONTEXT;
 
+    private GameActivity gameActivity;
+
     private GameThread gameThread;
     private Maze maze;
     private Player player;
@@ -48,9 +50,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private float xTimerPlacement;
     private float yTimerPlacement;
 
-    public Game(Context context, int size, int level) {
+    public Game(Context context, GameActivity gameActivity, int size, int level) {
         super(context);
 
+        this.gameActivity = gameActivity;
         this.size = size;
         this.level = level;
 
@@ -66,11 +69,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         paint.setStyle(Paint.Style.FILL);
 
         // Test
-
         timer = "0.0 s";
 
         paint.setAntiAlias(true);
-
 
     }
 
@@ -79,7 +80,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         player = new Player(this, playerX, playerY);
         inputManager = new InputManager(player);
         this.setOnTouchListener(inputManager);
+
+        gameThread = new GameThread(getHolder(), this);
+        gameThread.setRunning(true);
+        gameThread.start();
     }
+
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
 
@@ -101,10 +107,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         }
 
         init(size);
-
-        gameThread = new GameThread(getHolder(), this);
-        gameThread.setRunning(true);
-        gameThread.start();
     }
 
     @Override
@@ -179,6 +181,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public void setRunning(boolean val){
         gameThread.setRunning(val);
+    }
+
+    public GameActivity getGameActivity(){
+        return gameActivity;
     }
 
 }

@@ -90,13 +90,12 @@ public class Player {
     }
 
     public void checkIfGoalIsReached() {
-        if (currentCell == Maze.cells[Maze.cells.length - 1][Maze.cells[0].length - 1] && !goalIsFound) {
 
+        if (currentCell == Maze.cells[Maze.cells.length - 1][Maze.cells[0].length - 1] && !goalIsFound) {
             goalIsFound = true;
             playerWins();
-
-            game.resetGame();
         }
+
     }
     public void playerWins(){
 
@@ -112,6 +111,7 @@ public class Player {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                  name = input.getText().toString();
+                 game.resetGame();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -119,24 +119,23 @@ public class Player {
             public void onClick(DialogInterface dialog, int which) {
                 
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(game.getContext());
-                builder.setCancelable(false)
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(game.getContext());
+                builder2.setCancelable(false)
                         .setMessage("What do you want to do?")
-                        .setView(input)
                         .setPositiveButton("Menu ", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                game.getGameActivity().sendToMainActivity();
                             }
                         });
-                builder.setNegativeButton("Restart level", new DialogInterface.OnClickListener() {
+                builder2.setNegativeButton("Restart level", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         game.resetGame();
 
                     }
                 });
-                builder.show();
+                builder2.show();
 
 
 
