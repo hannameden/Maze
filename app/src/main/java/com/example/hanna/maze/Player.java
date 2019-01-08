@@ -1,18 +1,13 @@
 package com.example.hanna.maze;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.Build;
 import android.text.InputType;
 import android.util.Log;
-import android.view.Gravity;
 import android.widget.EditText;
-import android.widget.Toast;
 
 
 public class Player {
@@ -104,7 +99,7 @@ public class Player {
         final EditText input = new EditText(game.getContext());
         input.setInputType(InputType.TYPE_CLASS_TEXT );
 
-        playerTime = game.getTime();
+        playerTime = game.getTimerString();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(game.getContext());
         builder.setCancelable(false);

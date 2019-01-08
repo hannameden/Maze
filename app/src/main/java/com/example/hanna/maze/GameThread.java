@@ -14,8 +14,6 @@ public class GameThread extends Thread {
     private Game game;
     private boolean running;
 
-    private int seconds, tenSecs;
-
     public static Canvas canvas;
 
     public GameThread(SurfaceHolder surfaceHolder, Game game){
@@ -32,17 +30,13 @@ public class GameThread extends Thread {
         double delta = 0;
         long now;
         long lastTime = System.nanoTime();
-        long timer = 0;
 
         while(running) {
             canvas = null;
 
             now = System.nanoTime();
-            timer += now - lastTime;
             delta += (now - lastTime) / timePerUpdate;
             lastTime = now;
-            tenSecs = (int) (timer / 100000000);
-            game.setTenSecs(tenSecs);
 
             if(delta >= 1) {
 
@@ -67,12 +61,6 @@ public class GameThread extends Thread {
                 delta--;
             }
 
-            if(timer >= 1000000000) {
-                seconds++;
-                game.setSeconds(seconds);
-                timer = 0;
-            }
-
         }
 
     }
@@ -81,7 +69,4 @@ public class GameThread extends Thread {
         this.running = running;
     }
 
-    public void resetSeconds(){
-        seconds = 0;
-    }
 }
