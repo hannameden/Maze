@@ -1,14 +1,18 @@
 package com.example.hanna.maze;
 
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if(resourceId > 0)
             statusBarHeight = getResources().getDimensionPixelSize(resourceId);
 
-        text = findViewById(R.id.text);
+       // text = findViewById(R.id.text);
 
         spinnerSize = (Spinner) findViewById(R.id.spinnerSize);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -59,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinnerLevel.setAdapter(adapter2);
-
     }
 
     @Override
@@ -98,6 +101,5 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
         startActivity(hsIntent);
-
     }
 }

@@ -1,5 +1,6 @@
 package com.example.hanna.maze;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,8 +8,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
+import android.widget.EditText;
 import android.widget.Toast;
 
 
@@ -21,6 +24,7 @@ public class Player {
     public static Cell currentCell;
     private int x, y;
     private boolean goalIsFound;
+    public String name;
 
     private int speed = Cell.CELLSIZE;
 
@@ -57,7 +61,6 @@ public class Player {
             currentCell = Maze.cells[currentCell.getX()][currentCell.getY() + 1];
             checkIfGoalIsReached();
         }
-
     }
 
     public void moveUp() {
@@ -66,7 +69,6 @@ public class Player {
             y -= speed;
             currentCell = Maze.cells[currentCell.getX()][currentCell.getY() - 1];
         }
-
     }
 
     public void moveRight() {
@@ -76,9 +78,7 @@ public class Player {
             currentCell = Maze.cells[currentCell.getX() + 1][currentCell.getY()];
             checkIfGoalIsReached();
         }
-
     }
-
 
     public void render(Canvas canvas) {
 
@@ -91,41 +91,61 @@ public class Player {
 
     public void checkIfGoalIsReached() {
         if (currentCell == Maze.cells[Maze.cells.length - 1][Maze.cells[0].length - 1] && !goalIsFound) {
+
             goalIsFound = true;
-
-            playerWins(game.CURRENT_CONTEXT);
-
+            playerWins();
 
             game.resetGame();
         }
     }
-    public void playerWins(Context context){
+    public void playerWins(){
 
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-        builder1.setMessage("Congratulations! Your time: " + game.getTime() );
-        builder1.setCancelable(true);
+        final EditText input = new EditText(game.getContext());
+        input.setInputType(InputType.TYPE_CLASS_TEXT );
 
-        builder1.setPositiveButton(
-                "Yes",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
+        AlertDialog.Builder builder = new AlertDialog.Builder(game.getContext());
+        builder.setCancelable(false);
+        builder.setTitle("Congratulations! ")
+                .setMessage("Your time is " + game.getTime() + "\nPlease write in your name to get into the scoreboard!")
+                .setView(input)
+                .setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                 name = input.getText().toString();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(game.getContext());
+                builder.setCancelable(false)
+                        .setMessage("What do you want to do?")
+                        .setView(input)
+                        .setPositiveButton("Menu ", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                builder.setNegativeButton("Restart level", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        game.resetGame();
+
                     }
                 });
+                builder.show();
 
-        builder1.setNegativeButton(
-                "No",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
 
-        AlertDialog alert11 = builder1.create();
-        alert11.show();
 
-        Toast.makeText(Game.CURRENT_CONTEXT, "Goal is found!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
+
+        builder.show();
+        game.setRunning(false);
     }
 
     public static void setCurrentCell(int x, int y) {
