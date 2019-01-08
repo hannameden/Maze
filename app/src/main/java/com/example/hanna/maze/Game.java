@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.StaticLayout;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -38,9 +39,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     private long timer;
     private long now;
-    private long lastTime;
-
-
+    private long lastTime = System.nanoTime();
 
     public Game(Context context, GameActivity gameActivity, int size, int level) {
         super(context);
@@ -59,10 +58,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         paint.setTextSize(100);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setStyle(Paint.Style.FILL);
-
-        // Test
-        //timerString = "0.0 s";
-
         paint.setAntiAlias(true);
 
     }
@@ -72,6 +67,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         player = new Player(this, playerX, playerY);
         inputManager = new InputManager(player);
         this.setOnTouchListener(inputManager);
+
+        lastTime = System.nanoTime();
 
         gameThread = new GameThread(getHolder(), this);
         gameThread.setRunning(true);
@@ -126,10 +123,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         now = System.nanoTime();
         timer += now - lastTime;
-
         tenSecs = (int) (timer / 100000000);
 
-        if(timer >= 1000000000){
+        if (timer >= 1000000000) {
             seconds++;
             timer = 0;
         }
@@ -153,21 +149,20 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
-    public String getTimerString(){
+    public String getTimerString() {
         return timerString;
     }
 
-    public int getSeconds(){
+    public int getSeconds() {
         return seconds;
     }
 
-    public int getTenSecs(){
+    public int getTenSecs() {
         return tenSecs;
     }
 
     public void setSeconds(int seconds) {
         this.seconds = seconds;
-
     }
 
     public void setTenSecs(int tenSecs) {
@@ -178,8 +173,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         playerX = 0;
         playerY = 0;
+
         seconds = 0;
-        //gameThread.resetSeconds();
+        tenSecs = 0;
+
         init(size);
 
     }
@@ -192,12 +189,19 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.playerY = playerY;
     }
 
-    public void setRunning(boolean val){
+    public void setRunning(boolean val) {
         gameThread.setRunning(val);
     }
 
-    public GameActivity getGameActivity(){
+    public GameActivity getGameActivity() {
         return gameActivity;
     }
 
+    public long getTimer() {
+        return timer;
+    }
+
+    public void setTimer(long timer){
+        this.timer = timer;
+    }
 }

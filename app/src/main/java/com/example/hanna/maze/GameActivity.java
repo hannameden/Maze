@@ -57,6 +57,8 @@ public class GameActivity extends AppCompatActivity {
         outState.putInt("seconds", game.getSeconds());
         outState.putInt("tenSecs", game.getTenSecs());
 
+        outState.putLong("timer", game.getTimer());
+
     }
 
     @Override
@@ -68,6 +70,8 @@ public class GameActivity extends AppCompatActivity {
 
         game.setSeconds(savedInstanceState.getInt("seconds"));
         game.setTenSecs(savedInstanceState.getInt("seconds"));
+
+        game.setTimer(savedInstanceState.getLong("timer"));
 
     }
 
