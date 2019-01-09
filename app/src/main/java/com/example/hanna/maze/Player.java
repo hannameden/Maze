@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.renderscript.Sampler;
 import android.support.annotation.NonNull;
 import android.text.InputType;
 import android.util.Log;
@@ -37,11 +38,14 @@ public class Player {
     private int speed = Cell.CELLSIZE;
 
     private DatabaseReference databaseReference;
+    private ValueEventListener valueEventListener;
 
     private String levelString;
     private String sizeString;
 
     private ArrayList<Highscore> currentHighscoreResults;
+
+    private boolean dataIsFetched;
 
     public Player(Game game, int playerX, int playerY) {
 
@@ -199,23 +203,28 @@ public class Player {
 
         currentHighscoreResults = new ArrayList<>();
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for(DataSnapshot childDataSnapShot : dataSnapshot.child("highscore").child(sizeString).child(levelString).getChildren()){
+                if(!dataIsFetched){
 
-                    int playerRank = Integer.parseInt(childDataSnapShot.child("playerRank").getValue().toString());
-                    String playerName = childDataSnapShot.child("playerName").getValue().toString();
-                    double playerTime = Double.parseDouble(childDataSnapShot.child("playerTime").getValue().toString());
+                    for(DataSnapshot childDataSnapShot : dataSnapshot.child("highscore").child(sizeString).child(levelString).getChildren()){
 
-                    currentHighscoreResults.add(new Highscore(playerRank, playerName, playerTime));
+                        int playerRank = Integer.parseInt(childDataSnapShot.child("playerRank").getValue().toString());
+                        String playerName = childDataSnapShot.child("playerName").getValue().toString();
+                        double playerTime = Double.parseDouble(childDataSnapShot.child("playerTime").getValue().toString());
 
+                        currentHighscoreResults.add(new Highscore(playerRank, playerName, playerTime));
+
+                    }
+
+                    Highscore newHighscore = new Highscore(0, playerName, playerTime);
+
+                    insertNewHighscoreInDb(newHighscore, currentHighscoreResults);
+                    dataIsFetched = true;
                 }
 
-                Highscore newHighscore = new Highscore(0, playerName, playerTime);
-
-                insertNewHighscoreInDb(newHighscore, currentHighscoreResults);
 
             }
 
@@ -251,6 +260,7 @@ public class Player {
         }
 
 
+
         //saveToDb(currentHighscoreResults);
 
     }
@@ -266,6 +276,8 @@ public class Player {
             Highscore highscore = new Highscore(i+1, savelist.get(i).getPlayerName(), savelist.get(i).getPlayerTime());
             databaseReference.child("highscore").child(sizeString).child(levelString).child(Integer.toString(i+1)).setValue(highscore);
         }
+
+        databaseReference.removeEventListener(valueEventListener);
 
         /*
         Highscore highscore1 = new Highscore(1, "Hanna Medén", 15.1);
