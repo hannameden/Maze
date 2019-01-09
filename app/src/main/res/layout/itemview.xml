@@ -11,17 +11,18 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:text="player_rank"
-        android:layout_below="@id/player_rank"
+        android:layout_below="@id/player_rank_text"
+        android:layout_marginLeft="15dp"
         />
 
     <TextView
         android:id="@+id/player_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:textSize="20sp"
         android:textStyle="bold"
         android:text="player_name"
+        android:layout_centerHorizontal="true"
         />
 
     <TextView
@@ -32,6 +33,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:text="player_time"
+        android:layout_below="@id/player_time_text"
         />
 
 </RelativeLayout>
