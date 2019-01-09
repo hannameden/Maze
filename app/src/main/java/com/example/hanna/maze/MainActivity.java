@@ -87,7 +87,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         String level = spinnerLevel.getSelectedItem().toString();
 
+        Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
+        gameIntent.putExtra("size", size);
+        gameIntent.putExtra("level", level);
+        PendingIntent pendingIntent = TaskStackBuilder.create(MainActivity.this)
+                .addNextIntentWithParentStack(gameIntent)
+                .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        startActivity(gameIntent);
 
 
 /*
@@ -125,23 +132,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         });
         dialog.show();
 */
-
-
-
-        Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
-        gameIntent.putExtra("size", size);
-        gameIntent.putExtra("level", level);
-        PendingIntent pendingIntent = TaskStackBuilder.create(MainActivity.this)
-                .addNextIntentWithParentStack(gameIntent)
-                .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        startActivity(gameIntent);
-
-
-
-
-
-
 
 /*
 

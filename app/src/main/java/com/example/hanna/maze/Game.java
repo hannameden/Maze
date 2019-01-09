@@ -1,11 +1,14 @@
 package com.example.hanna.maze;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.CountDownTimer;
 import android.text.StaticLayout;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -63,12 +66,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     private void init(int size) {
+
         maze = new Maze(size, level);
         player = new Player(this, playerX, playerY);
         inputManager = new InputManager(player);
         this.setOnTouchListener(inputManager);
 
         lastTime = System.nanoTime();
+
 
         gameThread = new GameThread(getHolder(), this);
         gameThread.setRunning(true);
@@ -135,6 +140,29 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             timerString = seconds + "." + tenSecs + " s";
 
         lastTime = now;
+
+    }
+    public void startGameCountdown(){
+        new CountDownTimer(3000, 1000) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(Game.CURRENT_CONTEXT);
+            AlertDialog dialog;
+
+            public void onFinish() {
+                // When timer is finished
+                // Execute your code here
+
+            }
+
+            public void onTick(long millisUntilFinished) {
+                // millisUntilFinished    The amount of time until finished.
+                builder.setCancelable(false)
+                        .setTitle("Game starts in ")
+                        .setMessage(" " + (millisUntilFinished / 1000 + 1));
+                dialog = builder.create();
+
+                dialog.show();
+            }
+        }.start();
 
     }
 
