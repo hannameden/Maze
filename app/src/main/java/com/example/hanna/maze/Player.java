@@ -258,32 +258,7 @@ public class Player {
             Highscore highscore = new Highscore(i+1, currentHighscoreResults.get(i).getPlayerName(), currentHighscoreResults.get(i).getPlayerTime());
             databaseReference.child("highscore").child(sizeString).child(levelString).child(Integer.toString(i+1)).setValue(highscore);
         }
-
-
-
-        //saveToDb(currentHighscoreResults);
-
-    }
-
-    private void saveToDb(ArrayList<Highscore> savelist){
-
-        Log.d(TAG, "saveToDb: " + savelist.size());
-
-        int saveListOriginalSize = savelist.size();
-
-
-        for(int i = 0; i < saveListOriginalSize; i++){
-            Highscore highscore = new Highscore(i+1, savelist.get(i).getPlayerName(), savelist.get(i).getPlayerTime());
-            databaseReference.child("highscore").child(sizeString).child(levelString).child(Integer.toString(i+1)).setValue(highscore);
-        }
-
-        databaseReference.removeEventListener(valueEventListener);
-
-        /*
-        Highscore highscore1 = new Highscore(1, "Hanna Medén", 15.1);
-        databaseReference.child("highscore").child("5x5").child("level1").child("1").setValue(highscore1);
-        */
-
+        
     }
 
 }
