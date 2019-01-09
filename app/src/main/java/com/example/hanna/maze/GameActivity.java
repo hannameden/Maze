@@ -42,7 +42,7 @@ public class GameActivity extends AppCompatActivity {
         else
             level = 1;
 
-        game = new Game(this, size, level);
+        game = new Game(this, this, size, level);
 
         setContentView(game);
     }
@@ -54,6 +54,11 @@ public class GameActivity extends AppCompatActivity {
         outState.putInt("x", Player.currentCell.getX());
         outState.putInt("y", Player.currentCell.getY());
 
+        outState.putInt("seconds", game.getSeconds());
+        outState.putInt("tenSecs", game.getTenSecs());
+
+        outState.putLong("timer", game.getTimer());
+
     }
 
     @Override
@@ -63,6 +68,16 @@ public class GameActivity extends AppCompatActivity {
         game.setPlayerX(savedInstanceState.getInt("x"));
         game.setPlayerY(savedInstanceState.getInt("y"));
 
+        game.setSeconds(savedInstanceState.getInt("seconds"));
+        game.setTenSecs(savedInstanceState.getInt("seconds"));
+
+        game.setTimer(savedInstanceState.getLong("timer"));
+
+    }
+
+    public void sendToMainActivity(){
+        Intent mainIntent = new Intent(this, MainActivity.class);
+        startActivity(mainIntent);
     }
 
     public void sendToHighscoreActivity(){

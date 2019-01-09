@@ -82,7 +82,7 @@ public class HighscoreActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        writeToDatabase();
+        //writeToDatabase();
 
         listData = new ArrayList<>();
 
