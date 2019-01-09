@@ -16,6 +16,8 @@ public class GameActivity extends AppCompatActivity {
     private int size;
     private int level;
 
+    private int seed;
+
     private Game game;
 
     private int x, y;
@@ -25,7 +27,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
          String choice = getIntent().getStringExtra("size");
-         String levelString = getIntent().getStringExtra("level");
+         level = getIntent().getIntExtra("level", level);
 
         if (choice.equals("10 x 10")) {
             size = 10;
@@ -35,14 +37,14 @@ public class GameActivity extends AppCompatActivity {
             size = 15;
         }
 
-        if(levelString.equals("Easy"))
-            level = 3;
-        else if(levelString.equals("Lil hard"))
-            level = 4;
+        if(level == 1)
+            seed = 3;
+        else if(level == 2)
+            seed = 4;
         else
-            level = 1;
+            seed = 1;
 
-        game = new Game(this, this, size, level);
+        game = new Game(this, this, size, seed);
 
         setContentView(game);
     }
@@ -78,5 +80,9 @@ public class GameActivity extends AppCompatActivity {
     public void sendToMainActivity(){
         Intent mainIntent = new Intent(this, MainActivity.class);
         startActivity(mainIntent);
+    }
+
+    public int getLevel(){
+        return level;
     }
 }

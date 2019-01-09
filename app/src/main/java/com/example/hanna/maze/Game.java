@@ -6,7 +6,6 @@ import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.text.StaticLayout;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -31,7 +30,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private int seconds, tenSecs;
     private int playerX, playerY;
 
-    private int size, level;
+    private int size, seed;
 
     private String timerString;
     private float xTimerPlacement;
@@ -41,12 +40,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private long now;
     private long lastTime;
 
-    public Game(Context context, GameActivity gameActivity, int size, int level) {
+    public Game(Context context, GameActivity gameActivity, int size, int seed) {
         super(context);
 
         this.gameActivity = gameActivity;
         this.size = size;
-        this.level = level;
+        this.seed = seed;
 
         getHolder().addCallback(this);
 
@@ -59,11 +58,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setStyle(Paint.Style.FILL);
         paint.setAntiAlias(true);
-
     }
 
     private void init(int size) {
-        maze = new Maze(size, level);
+        maze = new Maze(size, seed);
         player = new Player(this, playerX, playerY);
         inputManager = new InputManager(player);
         this.setOnTouchListener(inputManager);
@@ -132,7 +130,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         }
 
         if (tenSecs != 10)
-            timerString = seconds + "." + tenSecs + " s";
+            timerString = seconds + "." + tenSecs;
 
         lastTime = now;
 
@@ -205,5 +203,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public void setTimer(long timer) {
         this.timer = timer;
+    }
+
+    public int getLevel(){
+        return gameActivity.getLevel();
+    }
+
+    public int getSize(){
+        return size;
     }
 }

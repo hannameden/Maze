@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +19,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    private static final String TAG = "MainActivity";
 
     public static int width;
     public static int height;
@@ -46,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
        // text = findViewById(R.id.text);
 
         spinnerSize = (Spinner) findViewById(R.id.spinnerSize);
+        spinnerSize.setGravity(Gravity.CENTER_HORIZONTAL);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.sizes_array, android.R.layout.simple_spinner_item);
@@ -78,8 +83,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void startGame(View v) {
 
         String size = spinnerSize.getSelectedItem().toString();
-
-        String level = spinnerLevel.getSelectedItem().toString();
+        int level = Integer.parseInt(spinnerLevel.getSelectedItem().toString());
 
         Intent gameIntent = new Intent(this, GameActivity.class);
         gameIntent.putExtra( "size", size);

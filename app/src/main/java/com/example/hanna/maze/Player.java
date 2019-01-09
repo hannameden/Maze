@@ -5,9 +5,19 @@ import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.annotation.NonNull;
 import android.text.InputType;
 import android.util.Log;
 import android.widget.EditText;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Player {
@@ -25,6 +35,13 @@ public class Player {
 
     private int speed = Cell.CELLSIZE;
 
+    private DatabaseReference databaseReference;
+
+    private String levelString;
+    private String sizeString;
+
+    private ArrayList<Highscore> currentHighscoreResults;
+
     public Player(Game game, int playerX, int playerY) {
 
         this.game = game;
@@ -35,6 +52,8 @@ public class Player {
         this.y = Maze.cells[playerX][playerY].getyPixels() + Cell.WALLSIZE;
 
         currentCell = Maze.cells[playerX][playerY];
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
     }
 
@@ -109,8 +128,11 @@ public class Player {
                 .setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                  playerName = input.getText().toString();
-                 saveResultToDatabase(playerName, playerTime);
+
+                 saveResultToDatabase(playerName, Double.parseDouble(playerTime));
+
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -147,9 +169,105 @@ public class Player {
         currentCell = Maze.cells[x][y];
     }
 
-    private void saveResultToDatabase(String playerName, String playerTime) {
+
+    private void saveResultToDatabase(final String playerName, final double playerTime) {
 
         //Compare with current database results and insert at correct position
 
+        int level = game.getLevel();
+        int size  = game.getSize();
+
+        if(size == 5){
+            sizeString = "5x5";
+        } else if(size == 10){
+            sizeString = "10x10";
+        }else{
+            sizeString = "15x15";
+        }
+
+        if(level == 1){
+            levelString = "level1";
+        } else if(level == 2){
+            levelString = "level2";
+        }else{
+            levelString = "level3";
+        }
+
+        currentHighscoreResults = new ArrayList<>();
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot childDataSnapShot : dataSnapshot.child("highscore").child(sizeString).child(levelString).getChildren()){
+
+                    int playerRank = Integer.parseInt(childDataSnapShot.child("playerRank").getValue().toString());
+                    String playerName = childDataSnapShot.child("playerName").getValue().toString();
+                    double playerTime = Double.parseDouble(childDataSnapShot.child("playerTime").getValue().toString());
+
+                    currentHighscoreResults.add(new Highscore(playerRank, playerName, playerTime));
+
+                }
+
+                Highscore newHighscore = new Highscore(0, playerName, playerTime);
+
+                insertNewHighscoreInDb(newHighscore, currentHighscoreResults);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
+
+    private void insertNewHighscoreInDb(Highscore newHighscore, ArrayList<Highscore> currentHighscoreResults){
+
+        boolean inserted = false;
+        int currentHighscoreResultsOriginalSize = currentHighscoreResults.size();
+
+        for(int i = 0; i < currentHighscoreResultsOriginalSize; i++){
+
+            if(newHighscore.getPlayerTime() <= currentHighscoreResults.get(i).getPlayerTime() && !inserted){
+                currentHighscoreResults.add(i, newHighscore);
+                inserted = true;
+            }
+
+        }
+
+        if(!inserted)
+            currentHighscoreResults.add(newHighscore);
+
+        for(int i = 0; i < currentHighscoreResults.size(); i++){
+            Highscore highscore = new Highscore(i+1, currentHighscoreResults.get(i).getPlayerName(), currentHighscoreResults.get(i).getPlayerTime());
+            databaseReference.child("highscore").child(sizeString).child(levelString).child(Integer.toString(i+1)).setValue(highscore);
+        }
+
+
+        //saveToDb(currentHighscoreResults);
+
+    }
+
+    private void saveToDb(ArrayList<Highscore> savelist){
+
+        Log.d(TAG, "saveToDb: " + savelist.size());
+
+        int saveListOriginalSize = savelist.size();
+
+
+        for(int i = 0; i < saveListOriginalSize; i++){
+            Highscore highscore = new Highscore(i+1, savelist.get(i).getPlayerName(), savelist.get(i).getPlayerTime());
+            databaseReference.child("highscore").child(sizeString).child(levelString).child(Integer.toString(i+1)).setValue(highscore);
+        }
+
+        /*
+        Highscore highscore1 = new Highscore(1, "Hanna Medén", 15.1);
+        databaseReference.child("highscore").child("5x5").child("level1").child("1").setValue(highscore1);
+        */
+
+    }
+
 }
