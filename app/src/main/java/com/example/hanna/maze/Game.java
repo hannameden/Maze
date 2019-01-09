@@ -181,4 +181,5 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         gameThread.setRunning(val);
     }
 
+    public void sendTo
 }

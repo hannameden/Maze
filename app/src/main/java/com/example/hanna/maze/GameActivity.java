@@ -64,4 +64,8 @@ public class GameActivity extends AppCompatActivity {
         game.setPlayerY(savedInstanceState.getInt("y"));
 
     }
+
+    public void sendToHighscoreActivity(){
+
+    }
 }

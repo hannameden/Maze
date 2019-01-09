@@ -2,8 +2,11 @@ package com.example.hanna.maze;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -100,10 +103,10 @@ public class Player {
     }
     public void playerWins(){
 
-        final EditText input = new EditText(game.getContext());
+        final EditText input = new EditText(Game.CURRENT_CONTEXT);
         input.setInputType(InputType.TYPE_CLASS_TEXT );
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(game.getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(game.CURRENT_CONTEXT);
         builder.setCancelable(false);
         builder.setTitle("Congratulations! ")
                 .setMessage("Your time is " + game.getTime() + "\nPlease write in your name to get into the scoreboard!")
@@ -112,6 +115,8 @@ public class Player {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                  name = input.getText().toString();
+
+
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -133,6 +138,7 @@ public class Player {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         game.resetGame();
+                        dialog.cancel();
 
                     }
                 });
