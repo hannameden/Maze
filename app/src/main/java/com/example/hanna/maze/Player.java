@@ -2,6 +2,7 @@ package com.example.hanna.maze;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -115,12 +116,13 @@ public class Player {
     }
     public void playerWins(){
 
-        final EditText input = new EditText(game.getContext());
+        final EditText input = new EditText(Game.CURRENT_CONTEXT);
         input.setInputType(InputType.TYPE_CLASS_TEXT );
 
         playerTime = game.getTimerString();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(game.getContext());
+
         builder.setCancelable(false);
         builder.setTitle("Congratulations! ")
                 .setMessage("Your time is " + playerTime + "\nPlease write in your name to get into the scoreboard!")
@@ -132,6 +134,7 @@ public class Player {
                  playerName = input.getText().toString();
 
                  saveResultToDatabase(playerName, Double.parseDouble(playerTime));
+
 
             }
         });
@@ -152,6 +155,7 @@ public class Player {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         game.resetGame();
+                        dialog.cancel();
 
                     }
                 });

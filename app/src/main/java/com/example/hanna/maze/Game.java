@@ -193,6 +193,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         gameThread.setRunning(val);
     }
 
+
     public GameActivity getGameActivity() {
         return gameActivity;
     }
@@ -212,4 +213,5 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public int getSize(){
         return size;
     }
+
 }

@@ -5,6 +5,8 @@ import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -14,9 +16,13 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -44,10 +50,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         height = dm.heightPixels;
 
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if(resourceId > 0)
+        if (resourceId > 0)
             statusBarHeight = getResources().getDimensionPixelSize(resourceId);
 
-       // text = findViewById(R.id.text);
+        // text = findViewById(R.id.text);
 
         spinnerSize = (Spinner) findViewById(R.id.spinnerSize);
         spinnerSize.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -85,18 +91,78 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         String size = spinnerSize.getSelectedItem().toString();
         int level = Integer.parseInt(spinnerLevel.getSelectedItem().toString());
 
-        Intent gameIntent = new Intent(this, GameActivity.class);
-        gameIntent.putExtra( "size", size);
-        gameIntent.putExtra("level", level);
 
-        PendingIntent pendingIntent = TaskStackBuilder.create(this)
+
+
+/*
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Be ready")
+                .setMessage("The game will start in.. ")
+                .setNegativeButton("hej", null)
+                .create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            private static final int AUTO_DISMISS_MILLIS = 1000;
+            @Override
+            public void onShow(final DialogInterface dialog) {
+                final Button defaultButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
+                final CharSequence positiveButtonText = defaultButton.getText();
+                new CountDownTimer(AUTO_DISMISS_MILLIS, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        defaultButton.setText(String.format(
+                                Locale.getDefault(), "%s (%d)",
+                                positiveButtonText,
+                                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) + 1 //add one so it never displays zero
+
+                        ));
+                    }
+                    @Override
+                    public void onFinish() {
+                        if (((AlertDialog) dialog).isShowing()) {
+
+                            dialog.dismiss();
+                        }
+                    }
+                }.start();
+            }
+        });
+        dialog.show();
+*/
+
+
+
+        Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
+        gameIntent.putExtra("size", size);
+        gameIntent.putExtra("level", level);
+        PendingIntent pendingIntent = TaskStackBuilder.create(MainActivity.this)
                 .addNextIntentWithParentStack(gameIntent)
                 .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
         startActivity(gameIntent);
+
+
+
+
+
+
+
+/*
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false)
+                .setTitle("Game starts in ")
+
+                .setMessage(" ");
+
+        builder.show();*/
+
+
     }
 
-    public void startHighscore(View view){
+
+    public void startHighscore(View view) {
 
         Intent hsIntent = new Intent(this, HighscoreActivity.class);
 

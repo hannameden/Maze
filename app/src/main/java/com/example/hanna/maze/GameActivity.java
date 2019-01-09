@@ -26,8 +26,8 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-         String choice = getIntent().getStringExtra("size");
-         level = getIntent().getIntExtra("level", level);
+        String choice = getIntent().getStringExtra("size");
+        level = getIntent().getIntExtra("level", level);
 
         if (choice.equals("10 x 10")) {
             size = 10;
@@ -37,9 +37,9 @@ public class GameActivity extends AppCompatActivity {
             size = 15;
         }
 
-        if(level == 1)
+        if (level == 1)
             seed = 3;
-        else if(level == 2)
+        else if (level == 2)
             seed = 4;
         else
             seed = 1;
@@ -77,12 +77,17 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    public void sendToMainActivity(){
+    public void sendToMainActivity() {
         Intent mainIntent = new Intent(this, MainActivity.class);
         startActivity(mainIntent);
     }
 
-    public int getLevel(){
+
+    public int getLevel() {
         return level;
+    }
+
+    public void sendToHighscoreActivity() {
+
     }
 }
