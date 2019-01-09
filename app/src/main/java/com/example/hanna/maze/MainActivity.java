@@ -1,28 +1,21 @@
 package com.example.hanna.maze;
 
-import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.CountDownTimer;
-import android.os.Handler;
+import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -39,11 +32,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private TextView text;
     private int size;
 
+    private LinearLayout linearLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        linearLayout = (LinearLayout) findViewById(R.id.main_layout);
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+            linearLayout.setBackgroundResource(R.drawable.bgflip);
+        
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         width = dm.widthPixels;
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (resourceId > 0)
             statusBarHeight = getResources().getDimensionPixelSize(resourceId);
 
-        // text = findViewById(R.id.text);
+        //text = findViewById(R.id.text);
 
         spinnerSize = (Spinner) findViewById(R.id.spinnerSize);
         spinnerSize.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -99,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
         startActivity(gameIntent);
-
 
 /*
 

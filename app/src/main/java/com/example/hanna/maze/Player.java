@@ -234,7 +234,6 @@ public class Player {
             }
         });
 
-
     }
 
     private void insertNewHighscoreInDb(Highscore newHighscore, ArrayList<Highscore> currentHighscoreResults){
@@ -258,7 +257,7 @@ public class Player {
             Highscore highscore = new Highscore(i+1, currentHighscoreResults.get(i).getPlayerName(), currentHighscoreResults.get(i).getPlayerTime());
             databaseReference.child("highscore").child(sizeString).child(levelString).child(Integer.toString(i+1)).setValue(highscore);
         }
-        
+
     }
 
 }
