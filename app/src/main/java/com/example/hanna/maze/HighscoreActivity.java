@@ -32,6 +32,8 @@ public class HighscoreActivity extends AppCompatActivity {
 
     private DatabaseReference databaseReference;
 
+    private ValueEventListener valueEventListener;
+
     private boolean isButtonLevel1Pressed, isButtonLevel2Pressed, isButtonLevel3Pressed;
     private boolean isButton5x5Pressed, isButton10x10Pressed, isButton15x15Pressed;
 
@@ -86,7 +88,7 @@ public class HighscoreActivity extends AppCompatActivity {
 
         listData = new ArrayList<>();
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -109,6 +111,8 @@ public class HighscoreActivity extends AppCompatActivity {
                 button10x10.setClickable(true);
                 button15x15.setClickable(true);
 
+                databaseReference.removeEventListener(valueEventListener);
+
             }
 
             @Override
@@ -117,58 +121,10 @@ public class HighscoreActivity extends AppCompatActivity {
             }
         });
 
+
+
         adapter = new HighscoreListAdapter(listData);
         recyclerView.setAdapter(adapter);
-
-    }
-
-    private void writeToDatabase(){
-
-        //5x5 level1
-        Highscore highscore1 = new Highscore(1, "Hanna Medén", 15.1);
-        databaseReference.child("highscore").child("5x5").child("level1").child("1").setValue(highscore1);
-
-        Highscore highscore2 = new Highscore(2, "Niklas Nordgren", 16.2);
-        databaseReference.child("highscore").child("5x5").child("level1").child("2").setValue(highscore2);
-
-        //5x5 level2
-        Highscore highscore3 = new Highscore(1, "Blah blah blah", 15.1);
-        databaseReference.child("highscore").child("5x5").child("level2").child("1").setValue(highscore3);
-
-        Highscore highscore4 = new Highscore(2, "Yo yoyoyoyoyoy", 16.2);
-        databaseReference.child("highscore").child("5x5").child("level2").child("2").setValue(highscore4);
-
-        //5x5 level3
-        Highscore highscore5 = new Highscore(1, "LEVEL 3 HANNAURURUUR", 15.1);
-        databaseReference.child("highscore").child("5x5").child("level3").child("1").setValue(highscore5);
-
-        Highscore highscore6 = new Highscore(2, "Lvl 3 yo 5x5", 16.2);
-        databaseReference.child("highscore").child("5x5").child("level3").child("2").setValue(highscore6);
-
-        //10x10 level1
-        Highscore highscore7 = new Highscore(1, "level1 10x10", 17.2);
-        databaseReference.child("highscore").child("10x10").child("level1").child("1").setValue(highscore7);
-
-        //10x10 level2
-        Highscore highscore8 = new Highscore(1, "level2 10x10", 18.2);
-        databaseReference.child("highscore").child("10x10").child("level2").child("1").setValue(highscore8);
-
-        //10x10 level3
-        Highscore highscore9 = new Highscore(1, "level3 10x10", 18.2);
-        databaseReference.child("highscore").child("10x10").child("level3").child("1").setValue(highscore9);
-
-
-        //15x15 level1
-        Highscore highscore10 = new Highscore(1, "level1 15x15", 17.2);
-        databaseReference.child("highscore").child("15x15").child("level1").child("1").setValue(highscore10);
-
-        //15x15 level2
-        Highscore highscore11 = new Highscore(1, "level2 15x15", 18.2);
-        databaseReference.child("highscore").child("15x15").child("level2").child("1").setValue(highscore11);
-
-        //15x15 level3
-        Highscore highscore12 = new Highscore(1, "level3 15x15", 18.2);
-        databaseReference.child("highscore").child("15x15").child("level3").child("1").setValue(highscore12);
 
     }
 
@@ -299,9 +255,8 @@ public class HighscoreActivity extends AppCompatActivity {
     private void readFromDatabaseHelperMethod(final String mazeSize, final String level){
 
         listData.clear();
-        adapter.notifyDataSetChanged();
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -316,6 +271,8 @@ public class HighscoreActivity extends AppCompatActivity {
 
                 adapter.notifyDataSetChanged();
 
+                databaseReference.removeEventListener(valueEventListener);
+
             }
 
             @Override
@@ -323,6 +280,8 @@ public class HighscoreActivity extends AppCompatActivity {
 
             }
         });
+
+
 
     }
 
