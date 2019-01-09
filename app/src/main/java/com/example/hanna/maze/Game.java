@@ -69,7 +69,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.setOnTouchListener(inputManager);
 
         lastTime = System.nanoTime();
-        
+
         gameThread = new GameThread(getHolder(), this);
         gameThread.setRunning(true);
         gameThread.start();
@@ -123,6 +123,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         now = System.nanoTime();
         timer += now - lastTime;
+
         tenSecs = (int) (timer / 100000000);
 
         if (timer >= 1000000000) {
@@ -130,7 +131,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             timer = 0;
         }
 
-        timerString = seconds + "." + tenSecs + " s";
+        if (tenSecs != 10)
+            timerString = seconds + "." + tenSecs + " s";
 
         lastTime = now;
 
@@ -201,7 +203,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         return timer;
     }
 
-    public void setTimer(long timer){
+    public void setTimer(long timer) {
         this.timer = timer;
     }
 }

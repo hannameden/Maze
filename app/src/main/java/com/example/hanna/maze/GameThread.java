@@ -9,7 +9,6 @@ public class GameThread extends Thread {
 
     public static final int MAX_FPS = 30;
 
-    private double averageFPS;
     private SurfaceHolder surfaceHolder;
     private Game game;
     private boolean running;
