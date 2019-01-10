@@ -44,6 +44,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_toStartOf="@+id/spinnerSize"
+        android:textAlignment="center"
         android:text="Level: "
         android:textColor="@color/colorWhite"  />
 
