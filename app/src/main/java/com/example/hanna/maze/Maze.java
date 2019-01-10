@@ -28,12 +28,12 @@ public class Maze {
 
     private boolean goalIsFound;
 
-    public Maze(int size, int level) {
+    public Maze(int size, int seed) {
         this.mazeHeight = size;
         this.mazeWidth = size;
 
         random = new Random();
-        random.setSeed(level);
+        random.setSeed(seed);
 
         initializeCells();
 

@@ -3,6 +3,7 @@ package com.example.hanna.maze;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
@@ -13,6 +14,10 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.Button;
+
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -65,6 +70,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     private void init(int size) {
 
+     //   countDown();
         maze = new Maze(size, seed);
 
         player = new Player(this, playerX, playerY);
@@ -141,6 +147,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         lastTime = now;
 
     }
+
     public void startGameCountdown(){
         new CountDownTimer(3000, 1000) {
             AlertDialog.Builder builder = new AlertDialog.Builder(Game.CURRENT_CONTEXT);
@@ -165,6 +172,46 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
+    public void countDown(){
+        Log.d(TAG, "countDown: ");
+
+        AlertDialog dialog = new AlertDialog.Builder(Game.CURRENT_CONTEXT)
+                .setTitle("Be ready")
+                .setMessage("The game will start in.. ")
+                .create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            private static final int AUTO_DISMISS_MILLIS = 3000;
+            @Override
+            public void onShow(final DialogInterface dialog) {
+                final Button defaultButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
+                final CharSequence positiveButtonText = defaultButton.getText();
+                new CountDownTimer(AUTO_DISMISS_MILLIS, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                        ((AlertDialog) dialog).setMessage("The game will start in.. " +String.format(
+                                Locale.getDefault(), "%s %d",
+                                positiveButtonText,
+                                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) + 1 //add one so it never displays zero
+                        ));
+                    }
+                    @Override
+                    public void onFinish() {
+                        if (((AlertDialog) dialog).isShowing()) {
+
+                            Intent gameIntent = new Intent(Game.CURRENT_CONTEXT, GameActivity.class);
+                            gameIntent.putExtra("size", size);
+                            gameIntent.putExtra("level", seed);
+
+                            CURRENT_CONTEXT.startActivity(gameIntent);
+                            dialog.dismiss();
+                        }
+                    }
+                }.start();
+            }
+        });
+        dialog.show();
+    }
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
@@ -206,6 +253,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         seconds = 0;
         tenSecs = 0;
 
+
+
         init(size);
 
     }
@@ -221,7 +270,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public void setRunning(boolean val) {
         gameThread.setRunning(val);
     }
-
 
     public GameActivity getGameActivity() {
         return gameActivity;

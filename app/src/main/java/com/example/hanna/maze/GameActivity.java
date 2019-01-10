@@ -4,10 +4,15 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -26,9 +31,10 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String choice = getIntent().getStringExtra("size");
+      //  String choice = getIntent().getStringExtra("size");
+        size = getIntent().getIntExtra("size", size);
         level = getIntent().getIntExtra("level", level);
-
+/*
         if (choice.equals("10 x 10")) {
             size = 10;
         } else if (choice.equals("5 x 5")) {
@@ -36,13 +42,14 @@ public class GameActivity extends AppCompatActivity {
         } else {
             size = 15;
         }
-
-        if (level == 1)
+*/
+       if (level == 1)
             seed = 3;
         else if (level == 2)
             seed = 4;
         else
             seed = 1;
+
 
         game = new Game(this, this, size, seed);
 
@@ -87,7 +94,43 @@ public class GameActivity extends AppCompatActivity {
         return level;
     }
 
-    public void sendToHighscoreActivity() {
+    public void countDown(){
 
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Be ready")
+                .setMessage("The game will start in.. ")
+                .create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            private static final int AUTO_DISMISS_MILLIS = 3000;
+            @Override
+            public void onShow(final DialogInterface dialog) {
+                final Button defaultButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
+                final CharSequence positiveButtonText = defaultButton.getText();
+                new CountDownTimer(AUTO_DISMISS_MILLIS, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                        ((AlertDialog) dialog).setMessage("The game will start in.. " +String.format(
+                                Locale.getDefault(), "%s %d",
+                                positiveButtonText,
+                                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) + 1 //add one so it never displays zero
+                        ));
+                    }
+                    @Override
+                    public void onFinish() {
+                        if (((AlertDialog) dialog).isShowing()) {
+
+                            Intent gameIntent = new Intent(Game.CURRENT_CONTEXT, GameActivity.class);
+                            gameIntent.putExtra("size", size);
+                            gameIntent.putExtra("level", seed);
+
+                            startActivity(gameIntent);
+                            dialog.dismiss();
+                        }
+                    }
+                }.start();
+            }
+        });
+        dialog.show();
     }
 }
