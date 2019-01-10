@@ -80,6 +80,7 @@ public class GameActivity extends AppCompatActivity {
     public void sendToMainActivity() {
         Intent mainIntent = new Intent(this, MainActivity.class);
         startActivity(mainIntent);
+        mediaPlayer.stop();
     }
 
 
