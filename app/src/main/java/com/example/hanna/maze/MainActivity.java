@@ -111,12 +111,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         level = Integer.parseInt(spinnerLevel.getSelectedItem().toString());
 
-        if (level == 1)
-            seed = 3;
-        else if (level == 2)
-            seed = 4;
-        else
-            seed = 1;
 
 
         countDown3();
@@ -157,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                             Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
                             gameIntent.putExtra("size", size);
-                            gameIntent.putExtra("seed", seed);
+                            gameIntent.putExtra("level", level);
 
                             startActivity(gameIntent);
                             dialog.dismiss();
