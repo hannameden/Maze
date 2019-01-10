@@ -1,11 +1,14 @@
 package com.example.hanna.maze;
 
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -13,9 +16,13 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -30,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private Spinner spinnerLevel;
 
     private TextView text;
-    private int size, level;
+    private int size, level,seed;
 
     private Player player;
 
@@ -89,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
+
     public void startGame(View v) {
 
         String stringSize = spinnerSize.getSelectedItem().toString();
@@ -103,13 +111,63 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         level = Integer.parseInt(spinnerLevel.getSelectedItem().toString());
 
-        Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
+        if (level == 1)
+            seed = 3;
+        else if (level == 2)
+            seed = 4;
+        else
+            seed = 1;
+
+
+        countDown3();
+
+      /* Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
         gameIntent.putExtra("size", size);
         gameIntent.putExtra("level", level);
 
-        startActivity(gameIntent);
+        startActivity(gameIntent); */
 
+    }
 
+    public void countDown3(){
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Be ready")
+                .setMessage("The game will start in.. ")
+                .create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            private static final int AUTO_DISMISS_MILLIS = 3000;
+            @Override
+            public void onShow(final DialogInterface dialog) {
+                final Button defaultButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
+                final CharSequence positiveButtonText = defaultButton.getText();
+                new CountDownTimer(AUTO_DISMISS_MILLIS, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                        ((AlertDialog) dialog).setMessage("The game will start in.. " +String.format(
+                                Locale.getDefault(), "%s %d",
+                                positiveButtonText,
+                                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) + 1 //add one so it never displays zero
+                        ));
+                    }
+                    @Override
+                    public void onFinish() {
+                        if (((AlertDialog) dialog).isShowing()) {
+
+                            Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
+                            gameIntent.putExtra("size", size);
+                            gameIntent.putExtra("seed", seed);
+
+                            startActivity(gameIntent);
+                            dialog.dismiss();
+                        }
+                    }
+                }.start();
+            }
+        });
+        dialog.show();
+    }
         
 
         /*Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
@@ -219,7 +277,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
     */
 
-    }
+
 
     public void startHighscore(View view) {
 

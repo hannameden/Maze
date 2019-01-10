@@ -32,17 +32,17 @@ public class GameActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(this, R.raw.action);
         mediaPlayer.setLooping(true);
         mediaPlayer.setVolume(100,100);
-        mediaPlayer.start();
+      //  mediaPlayer.start();
 
         size = getIntent().getIntExtra("size", size);
-        level = getIntent().getIntExtra("level", level);
+        seed = getIntent().getIntExtra("seed", seed);
 
-       if (level == 1)
+       /*if (level == 1)
             seed = 3;
         else if (level == 2)
             seed = 4;
         else
-            seed = 1;
+            seed = 1;*/
 
         game = new Game(this, this, size, seed);
 

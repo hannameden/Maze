@@ -171,9 +171,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         }.start();
 
     }
-
-    public void countDown(){
-        Log.d(TAG, "countDown: ");
+    public void countDown2(){
 
         AlertDialog dialog = new AlertDialog.Builder(Game.CURRENT_CONTEXT)
                 .setTitle("Be ready")
@@ -204,6 +202,43 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                             gameIntent.putExtra("level", seed);
 
                             CURRENT_CONTEXT.startActivity(gameIntent);
+                            dialog.dismiss();
+                        }
+                    }
+                }.start();
+            }
+        });
+        dialog.show();
+    }
+
+    public void countDown(){
+        Log.d(TAG, "countDown: ");
+
+        AlertDialog dialog = new AlertDialog.Builder(Game.CURRENT_CONTEXT)
+                .setTitle("Be ready")
+                .setMessage("The game will start in.. ")
+                .create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            private static final int AUTO_DISMISS_MILLIS = 3000;
+            @Override
+            public void onShow(final DialogInterface dialog) {
+                final Button defaultButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
+                final CharSequence positiveButtonText = defaultButton.getText();
+                new CountDownTimer(AUTO_DISMISS_MILLIS, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                        ((AlertDialog) dialog).setMessage("The game will start in.. " +String.format(
+                                Locale.getDefault(), "%s %d",
+                                positiveButtonText,
+                                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) + 1 //add one so it never displays zero
+                        ));
+                    }
+                    @Override
+                    public void onFinish() {
+                        if (((AlertDialog) dialog).isShowing()) {
+
+                            init(size);
                             dialog.dismiss();
                         }
                     }
@@ -254,8 +289,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         tenSecs = 0;
 
 
+        countDown2();
 
-        init(size);
+     //   init(size);
 
     }
 
