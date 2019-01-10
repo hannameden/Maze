@@ -41,11 +41,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-                linearLayout = (LinearLayout) findViewById(R.id.main_layout);
+        linearLayout = (LinearLayout) findViewById(R.id.main_layout);
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
             linearLayout.setBackgroundResource(R.drawable.bgflip);
-        
+
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -217,7 +217,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         dialog.show();
     }
-    public void startHighscore(View view) {
+    */
+
+    }
+
+    public void startHighscore (View view){
 
         Intent hsIntent = new Intent(this, HighscoreActivity.class);
 
@@ -226,6 +230,5 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
         startActivity(hsIntent);
-    }*/
     }
 }
