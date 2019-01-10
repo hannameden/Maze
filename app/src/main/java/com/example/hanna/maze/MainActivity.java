@@ -41,11 +41,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-                linearLayout = (LinearLayout) findViewById(R.id.main_layout);
+        linearLayout = (LinearLayout) findViewById(R.id.main_layout);
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-            linearLayout.setBackgroundResource(R.drawable.bgflip);
-        
+            linearLayout.setBackgroundResource(R.id.bgflip);
+
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
