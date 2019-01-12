@@ -199,7 +199,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
                             Intent gameIntent = new Intent(Game.CURRENT_CONTEXT, GameActivity.class);
                             gameIntent.putExtra("size", size);
-                            gameIntent.putExtra("level", seed);
+                            gameIntent.putExtra("level", getLevel());
 
                             CURRENT_CONTEXT.startActivity(gameIntent);
                             dialog.dismiss();
