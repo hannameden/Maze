@@ -16,9 +16,10 @@
         android:layout_height="wrap_content"
         android:layout_toStartOf="@+id/spinnerSize"
         android:textAlignment="center"
-        android:text="HELLO \nWelcome to our \nMaze game\n"
+        android:text="The Maze\n"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
+        android:textSize="40dp"
         />
 
     <TextView
@@ -42,6 +43,7 @@
     <TextView
         android:id="@+id/textLevel"
         android:layout_width="150dp"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_toStartOf="@+id/spinnerSize"
         android:text="Level: "
