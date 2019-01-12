@@ -46,7 +46,6 @@
         android:layout_width="150dp"
         android:gravity="center"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_toStartOf="@+id/spinnerSize"
         android:textAlignment="center"
         android:text="Level: "

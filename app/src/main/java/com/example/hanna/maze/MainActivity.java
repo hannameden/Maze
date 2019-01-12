@@ -36,10 +36,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private Spinner spinnerSize;
     private Spinner spinnerLevel;
 
-    private TextView text;
-    private int size, level,seed;
-
-    private Player player;
+    private int size, level;
 
     private LinearLayout linearLayout;
 
@@ -53,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
             linearLayout.setBackgroundResource(R.drawable.bgflip);
 
-
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         width = dm.widthPixels;
@@ -62,8 +58,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0)
             statusBarHeight = getResources().getDimensionPixelSize(resourceId);
-
-        //text = findViewById(R.id.text);
 
         spinnerSize = (Spinner) findViewById(R.id.spinnerSize);
         spinnerSize.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -96,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-
     public void startGame(View v) {
 
         String stringSize = spinnerSize.getSelectedItem().toString();
@@ -111,19 +104,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         level = Integer.parseInt(spinnerLevel.getSelectedItem().toString());
 
-
-
-        countDown3();
-
-      /* Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
-        gameIntent.putExtra("size", size);
-        gameIntent.putExtra("level", level);
-
-        startActivity(gameIntent); */
+        countDown();
 
     }
 
-    public void countDown3(){
+    public void countDown(){
 
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Be ready")
@@ -171,106 +156,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 .addNextIntentWithParentStack(gameIntent)
                 .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        startActivity(gameIntent);*/
-        /*
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(false)
-                .setTitle("Game starts in ")
-
-                .setMessage(" ");
-
-        builder.show();*/
-
-
-/*
-
-    }
-
-    public void countDown2(){
-
-
-
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Be ready")
-                .create();
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            private static final int AUTO_DISMISS_MILLIS = 3000;
-            @Override
-            public void onShow(final DialogInterface dialog) {
-                final Button defaultButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
-                final CharSequence positiveButtonText = defaultButton.getText();
-                new CountDownTimer(AUTO_DISMISS_MILLIS, 1000) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-
-                        ((AlertDialog) dialog).setMessage("The game will start in.. " +String.format(
-                                Locale.getDefault(), "%s %d",
-                                positiveButtonText,
-                                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) + 1 //add one so it never displays zero
-                        ));
-                    }
-                    @Override
-                    public void onFinish() {
-                       /* if (((AlertDialog) dialog).isShowing()) {
-                            dialog.dismiss();
-                        } */
-             /*           Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
-                        gameIntent.putExtra("size", size);
-                        gameIntent.putExtra("level", level);
-
-                        startActivity(gameIntent);
-
-                    }
-                }.start();
-            }
-        });
-
-        dialog.show();
-    }
-
-    public void countDown(){
-
-        Log.d(TAG, "countDown: ");
-
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Be ready")
-                .create();
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            private static final int AUTO_DISMISS_MILLIS = 3000;
-            @Override
-            public void onShow(final DialogInterface dialog) {
-                final Button defaultButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
-                final CharSequence positiveButtonText = defaultButton.getText();
-                new CountDownTimer(AUTO_DISMISS_MILLIS, 1000) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-
-                        ((AlertDialog) dialog).setMessage("The game will start in.. " +String.format(
-                                Locale.getDefault(), "%s %d",
-                                positiveButtonText,
-                                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) + 1 //add one so it never displays zero
-                        ));
-                    }
-                    @Override
-                    public void onFinish() {
-                       /* if (((AlertDialog) dialog).isShowing()) {
-                            dialog.dismiss();
-                        } */
-              /*          Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
-                        gameIntent.putExtra("size", size);
-                        gameIntent.putExtra("level", level);
-
-                        startActivity(gameIntent);
-
-                    }
-                }.start();
-            }
-        });
-
-        dialog.show();
-    }
-    */
-
+    startActivity(gameIntent);*/
 
 
     public void startHighscore(View view) {
