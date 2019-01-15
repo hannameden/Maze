@@ -29,10 +29,12 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        /*
         mediaPlayer = MediaPlayer.create(this, R.raw.action);
         mediaPlayer.setLooping(true);
         mediaPlayer.setVolume(100,100);
         mediaPlayer.start();
+        */
 
         size = getIntent().getIntExtra("size", size);
         level = getIntent().getIntExtra("level", level);
@@ -47,6 +49,23 @@ public class GameActivity extends AppCompatActivity {
         game = new Game(this, this, size, seed);
 
         setContentView(game);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        Bundle outState = new Bundle();
+
+        outState.putInt("x", Player.currentCell.getX());
+        outState.putInt("y", Player.currentCell.getY());
+
+        outState.putInt("seconds", game.getSeconds());
+        outState.putInt("tenSecs", game.getTenSecs());
+
+        outState.putLong("timer", game.getTimer());
+
+        onSaveInstanceState(outState);
     }
 
     @Override
@@ -80,7 +99,7 @@ public class GameActivity extends AppCompatActivity {
     public void sendToMainActivity() {
         Intent mainIntent = new Intent(this, MainActivity.class);
         startActivity(mainIntent);
-        mediaPlayer.stop();
+        //mediaPlayer.stop();
     }
 
 

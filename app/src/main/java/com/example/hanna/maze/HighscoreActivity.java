@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +28,8 @@ public class HighscoreActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+
+    private ProgressBar progressBar;
 
     private List<Highscore> listData;
 
@@ -60,6 +63,8 @@ public class HighscoreActivity extends AppCompatActivity {
         button5x5.setClickable(false);
         button10x10.setClickable(false);
         button15x15.setClickable(false);
+
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
         buttonLevel1.setBackgroundResource(android.R.drawable.btn_default);
         button5x5.setBackgroundResource(android.R.drawable.btn_default);
@@ -111,6 +116,8 @@ public class HighscoreActivity extends AppCompatActivity {
                 button10x10.setClickable(true);
                 button15x15.setClickable(true);
 
+                progressBar.setVisibility(ProgressBar.INVISIBLE);
+
                 databaseReference.removeEventListener(valueEventListener);
 
             }
@@ -120,7 +127,6 @@ public class HighscoreActivity extends AppCompatActivity {
 
             }
         });
-
 
 
         adapter = new HighscoreListAdapter(listData);
@@ -181,6 +187,7 @@ public class HighscoreActivity extends AppCompatActivity {
     }
 
     public void onClickButton10x10(View v){
+
         isButton5x5Pressed = false;
         isButton10x10Pressed = true;
         isButton15x15Pressed = false;
@@ -193,6 +200,7 @@ public class HighscoreActivity extends AppCompatActivity {
     }
 
     public void onClickButton15x15(View v){
+
         isButton5x5Pressed = false;
         isButton10x10Pressed = false;
         isButton15x15Pressed = true;
@@ -205,6 +213,9 @@ public class HighscoreActivity extends AppCompatActivity {
     }
 
     private void readFromDatabase(){
+
+        listData.clear();
+        adapter.notifyDataSetChanged();
 
         if(isButtonLevel1Pressed){
             if(isButton5x5Pressed){
@@ -254,7 +265,7 @@ public class HighscoreActivity extends AppCompatActivity {
 
     private void readFromDatabaseHelperMethod(final String mazeSize, final String level){
 
-        listData.clear();
+        progressBar.setVisibility(ProgressBar.VISIBLE);
 
         databaseReference.addValueEventListener(valueEventListener = new ValueEventListener() {
             @Override
@@ -270,6 +281,8 @@ public class HighscoreActivity extends AppCompatActivity {
                 }
 
                 adapter.notifyDataSetChanged();
+
+                progressBar.setVisibility(ProgressBar.INVISIBLE);
 
                 databaseReference.removeEventListener(valueEventListener);
 
