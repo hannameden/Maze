@@ -79,6 +79,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         lastTime = System.nanoTime();
 
+        unlockRotation();
+
         gameThread = new GameThread(getHolder(), this);
         gameThread.setRunning(true);
         gameThread.start();
@@ -189,7 +191,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         lockRotation();
         countDown();
-
     }
 
     public void countDown(){
