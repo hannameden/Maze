@@ -106,12 +106,4 @@ public class GameActivity extends AppCompatActivity {
         return level;
     }
 
-    public void lockRotation(){
-        setRequestedOrientation(Game.currentConfig);
-    }
-
-    public void unlockRotation(){
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-    }
-
 }

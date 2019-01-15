@@ -261,11 +261,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void lockRotation(){
-        gameActivity.lockRotation();
+        gameActivity.setRequestedOrientation(Game.currentConfig);
     }
 
     public void unlockRotation(){
         gameActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
-
 }
