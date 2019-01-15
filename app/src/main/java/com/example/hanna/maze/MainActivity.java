@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -143,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
         dialog.show();
+
     }
     public void startGameActivity(){
         Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
