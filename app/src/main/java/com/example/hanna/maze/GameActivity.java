@@ -91,7 +91,7 @@ public class GameActivity extends AppCompatActivity {
 
             game.setTimer(sharedPreferences.getLong("timer", 0));
         }
-        
+
     }
 
 
