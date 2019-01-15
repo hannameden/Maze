@@ -100,4 +100,13 @@
         android:layout_height="match_parent"
         android:layout_below="@id/player_rank_text"/>
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/player_name_text"
+        android:visibility="visible"/>
+
 </RelativeLayout>
