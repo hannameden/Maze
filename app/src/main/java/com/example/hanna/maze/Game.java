@@ -228,7 +228,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             }
         });
         dialog.show();
-
+        unlockRotation();
     }
 
     public void setPlayerX(int playerX) {

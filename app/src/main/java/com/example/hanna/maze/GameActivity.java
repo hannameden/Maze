@@ -81,7 +81,6 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
