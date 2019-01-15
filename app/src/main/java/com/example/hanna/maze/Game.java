@@ -187,8 +187,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         seconds = 0;
         tenSecs = 0;
 
+        lockRotation();
         countDown();
-        unlockRotation();
+
     }
 
     public void countDown(){
@@ -226,6 +227,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             }
         });
         dialog.show();
+        unlockRotation();
     }
 
     public void setPlayerX(int playerX) {

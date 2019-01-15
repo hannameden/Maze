@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private static final String TAG = "MainActivity";
 
+    private static int currentConfig;
     public static int width;
     public static int height;
 
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        currentConfig = getResources().getConfiguration().orientation;
 
         linearLayout = (LinearLayout) findViewById(R.id.main_layout);
 
@@ -105,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void countDown(){
+
+        this.setRequestedOrientation(currentConfig);
 
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Be ready")
