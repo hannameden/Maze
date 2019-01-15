@@ -194,6 +194,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         AlertDialog dialog = new AlertDialog.Builder(Game.CURRENT_CONTEXT)
                 .setTitle("Be ready")
                 .setMessage("The game will start in.. ")
+                .setCancelable(false)
                 .create();
         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
             private static final int AUTO_DISMISS_MILLIS = 3000;
