@@ -90,7 +90,6 @@ public class Maze {
         return true;
     }
 
-
     private void removeWallBetween(Cell cc, Cell nc) {
 
         int ccX = cc.getX();
@@ -182,38 +181,14 @@ public class Maze {
         goalCell.fillCell(canvas, paint);
 
 
-        //Solution test
-        /*
-		for(int x = 0; x < cells.length; x++)
+        //Solution test, for future functionality
+	/*	for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++) {
 				if(cells[x][y].isSolution()) {
-					g.setColor(Color.MAGENTA);
-					cells[x][y].fillCell(g);
+					paint.setColor(Color.MAGENTA);
+					cells[x][y].fillCell(canvas, paint);
 				}
 			}*/
-
-
-        //Neighbour test
-
-		/*
-		for(int i = 0; i < neighbours.size(); i++) {
-			g.setColor(Color.black);
-			neighbours.get(i).fillCell(g);
-		}
-		 */
-
-		/*
-        paint.setColor(Color.RED);
-        goalCell.fillCell(canvas, paint);
-
-        paint.setColor(Color.GREEN);
-        startCell.fillCell(canvas, paint);
-
-        paint.setColor(Color.BLUE);
-        cells[5][0].fillCell(canvas, paint);
-        */
-
-    }
-
+	}
 }
 

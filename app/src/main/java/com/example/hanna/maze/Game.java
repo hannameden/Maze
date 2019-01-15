@@ -70,7 +70,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     private void init(int size) {
 
-     //   countDown();
         maze = new Maze(size, seed);
 
         player = new Player(this, playerX, playerY);
@@ -78,7 +77,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.setOnTouchListener(inputManager);
 
         lastTime = System.nanoTime();
-
 
         gameThread = new GameThread(getHolder(), this);
         gameThread.setRunning(true);
@@ -148,72 +146,50 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
-    public void startGameCountdown(){
-        new CountDownTimer(3000, 1000) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(Game.CURRENT_CONTEXT);
-            AlertDialog dialog;
+    @Override
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
+        canvas.drawColor(Color.WHITE);
 
-            public void onFinish() {
-                // When timer is finished
-                // Execute your code here
+        maze.render(canvas);
+        player.render(canvas);
+        inputManager.render(canvas);
 
-            }
-
-            public void onTick(long millisUntilFinished) {
-                // millisUntilFinished    The amount of time until finished.
-                builder.setCancelable(false)
-                        .setTitle("Game starts in ")
-                        .setMessage(" " + (millisUntilFinished / 1000 + 1));
-                dialog = builder.create();
-
-                dialog.show();
-            }
-        }.start();
-
+        canvas.drawText(timerString, xTimerPlacement, yTimerPlacement, paint);
     }
-    public void countDown2(){
 
-        AlertDialog dialog = new AlertDialog.Builder(Game.CURRENT_CONTEXT)
-                .setTitle("Be ready")
-                .setMessage("The game will start in.. ")
-                .setCancelable(false)
-                .create();
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            private static final int AUTO_DISMISS_MILLIS = 3000;
-            @Override
-            public void onShow(final DialogInterface dialog) {
-                final Button defaultButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
-                final CharSequence positiveButtonText = defaultButton.getText();
-                new CountDownTimer(AUTO_DISMISS_MILLIS, 1000) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {
+    public String getTimerString() {
+        return timerString;
+    }
 
-                        ((AlertDialog) dialog).setMessage("The game will start in.. " +String.format(
-                                Locale.getDefault(), "%s %d",
-                                positiveButtonText,
-                                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) + 1 //add one so it never displays zero
-                        ));
-                    }
-                    @Override
-                    public void onFinish() {
-                        if (((AlertDialog) dialog).isShowing()) {
+    public int getSeconds() {
+        return seconds;
+    }
 
-                            Intent gameIntent = new Intent(Game.CURRENT_CONTEXT, GameActivity.class);
-                            gameIntent.putExtra("size", size);
-                            gameIntent.putExtra("level", getLevel());
+    public int getTenSecs() {
+        return tenSecs;
+    }
 
-                            CURRENT_CONTEXT.startActivity(gameIntent);
-                            dialog.dismiss();
-                        }
-                    }
-                }.start();
-            }
-        });
-        dialog.show();
+    public void setSeconds(int seconds) {
+        this.seconds = seconds;
+    }
+
+    public void setTenSecs(int tenSecs) {
+        this.tenSecs = tenSecs;
+    }
+
+    public void resetGame() {
+
+        playerX = 0;
+        playerY = 0;
+
+        seconds = 0;
+        tenSecs = 0;
+
+        countDown();
     }
 
     public void countDown(){
-        Log.d(TAG, "countDown: ");
 
         AlertDialog dialog = new AlertDialog.Builder(Game.CURRENT_CONTEXT)
                 .setTitle("Be ready")
@@ -247,53 +223,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             }
         });
         dialog.show();
-    }
-    @Override
-    public void draw(Canvas canvas) {
-        super.draw(canvas);
-        canvas.drawColor(Color.WHITE);
-
-        maze.render(canvas);
-        player.render(canvas);
-        inputManager.render(canvas);
-
-        canvas.drawText(timerString, xTimerPlacement, yTimerPlacement, paint);
-
-    }
-
-    public String getTimerString() {
-        return timerString;
-    }
-
-    public int getSeconds() {
-        return seconds;
-    }
-
-    public int getTenSecs() {
-        return tenSecs;
-    }
-
-    public void setSeconds(int seconds) {
-        this.seconds = seconds;
-    }
-
-    public void setTenSecs(int tenSecs) {
-        this.tenSecs = tenSecs;
-    }
-
-    public void resetGame() {
-
-        playerX = 0;
-        playerY = 0;
-
-        seconds = 0;
-        tenSecs = 0;
-
-
-        countDown2();
-
-     //   init(size);
-
     }
 
     public void setPlayerX(int playerX) {

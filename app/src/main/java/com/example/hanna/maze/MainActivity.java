@@ -6,8 +6,6 @@ import android.app.TaskStackBuilder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,8 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
-
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -134,11 +130,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     public void onFinish() {
                         if (((AlertDialog) dialog).isShowing()) {
 
-                            Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
-                            gameIntent.putExtra("size", size);
-                            gameIntent.putExtra("level", level);
-
-                            startActivity(gameIntent);
+                            startGameActivity();
                             dialog.dismiss();
                         }
                     }
@@ -147,26 +139,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         });
         dialog.show();
     }
-        
-
-        /*Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
+    public void startGameActivity(){
+        Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
         gameIntent.putExtra("size", size);
         gameIntent.putExtra("level", level);
-        PendingIntent pendingIntent = TaskStackBuilder.create(MainActivity.this)
-                .addNextIntentWithParentStack(gameIntent)
-                .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-    startActivity(gameIntent);*/
+        startActivity(gameIntent);
+    }
 
-
-    public void startHighscore(View view) {
+    public void startHighscoreActivity(View view) {
 
         Intent hsIntent = new Intent(this, HighscoreActivity.class);
-
-        PendingIntent pendingIntent = TaskStackBuilder.create(this)
-                .addNextIntentWithParentStack(hsIntent)
-                .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-
         startActivity(hsIntent);
     }
 }
