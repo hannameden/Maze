@@ -1,9 +1,11 @@
 package com.example.hanna.maze;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -145,4 +147,13 @@ public class GameActivity extends AppCompatActivity {
         });
         dialog.show();
     }
+
+    public void lockRotation(){
+        setRequestedOrientation(Game.currentConfig);
+    }
+
+    public void unlockRotation(){
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+    }
+
 }

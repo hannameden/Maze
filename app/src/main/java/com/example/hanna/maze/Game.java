@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -187,6 +188,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         tenSecs = 0;
 
         countDown();
+        unlockRotation();
     }
 
     public void countDown(){
@@ -255,6 +257,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public int getSize(){
         return size;
+    }
+
+    public void lockRotation(){
+        gameActivity.lockRotation();
+    }
+
+    public void unlockRotation(){
+        gameActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
 }

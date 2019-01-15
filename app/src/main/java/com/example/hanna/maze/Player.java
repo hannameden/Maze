@@ -127,6 +127,8 @@ public class Player {
 
     public void playerWinsPopup(){
 
+        game.lockRotation();
+
         final EditText input = new EditText(Game.CURRENT_CONTEXT);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         AlertDialog.Builder builder = new AlertDialog.Builder(game.getContext());
