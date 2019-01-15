@@ -25,6 +25,8 @@ public class GameActivity extends AppCompatActivity {
     private MediaPlayer mediaPlayer;
     private Game game;
 
+    private boolean hasBeenPaused;
+
     private int x, y;
 
     @Override
@@ -51,10 +53,12 @@ public class GameActivity extends AppCompatActivity {
 
         setContentView(game);
     }
-    
+
     @Override
     protected void onPause() {
         super.onPause();
+
+        hasBeenPaused = true;
 
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -76,16 +80,18 @@ public class GameActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+        if(hasBeenPaused){
+            SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
 
-        game.setPlayerX(sharedPreferences.getInt("x", 0));
-        game.setPlayerY(sharedPreferences.getInt("y", 0));
+            game.setPlayerX(sharedPreferences.getInt("x", 0));
+            game.setPlayerY(sharedPreferences.getInt("y", 0));
 
-        game.setSeconds(sharedPreferences.getInt("seconds", 0));
-        game.setTenSecs(sharedPreferences.getInt("tenSecs", 0));
+            game.setSeconds(sharedPreferences.getInt("seconds", 0));
+            game.setTenSecs(sharedPreferences.getInt("tenSecs", 0));
 
-        game.setTimer(sharedPreferences.getLong("timer", 0));
-
+            game.setTimer(sharedPreferences.getLong("timer", 0));
+        }
+        
     }
 
 
