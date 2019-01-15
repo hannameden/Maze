@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // Apply the adapter to the spinner
         spinnerSize.setAdapter(adapter);
 
-
         spinnerLevel = (Spinner) findViewById(R.id.spinnerLevel);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
@@ -136,10 +135,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     public void onFinish() {
                         if (((AlertDialog) dialog).isShowing()) {
 
+
+                            MainActivity.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                             startGameActivity();
                             dialog.dismiss();
                         }
                     }
+
+
+
                 }.start();
             }
         });
@@ -150,7 +154,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
         gameIntent.putExtra("size", size);
         gameIntent.putExtra("level", level);
-
         startActivity(gameIntent);
     }
 

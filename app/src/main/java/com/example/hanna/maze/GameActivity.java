@@ -27,8 +27,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        game.unlockRotation();
-
+     
         mediaPlayer = MediaPlayer.create(this, R.raw.action);
         mediaPlayer.setLooping(true);
         mediaPlayer.setVolume(100,100);
