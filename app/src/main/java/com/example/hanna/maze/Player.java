@@ -2,10 +2,13 @@ package com.example.hanna.maze;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
+import android.support.constraint.solver.widgets.Rectangle;
 import android.text.InputType;
 import android.util.Log;
 import android.widget.EditText;
@@ -17,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-
 
 public class Player {
 
@@ -44,6 +46,8 @@ public class Player {
 
     private boolean dataIsFetched;
 
+    private Bitmap playerImage;
+
     public Player(Game game, int playerX, int playerY) {
 
         this.game = game;
@@ -56,6 +60,12 @@ public class Player {
         currentCell = Maze.cells[playerX][playerY];
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        BitmapFactory bf = new BitmapFactory();
+        playerImage = bf.decodeResource(game.CURRENT_CONTEXT.getResources(), R.drawable.alienbeige);
+
+        playerImage = Bitmap.createScaledBitmap(playerImage, Cell.CELLSIZE - Cell.WALLSIZE, Cell.CELLSIZE - Cell.WALLSIZE, false);
+
 
     }
 
@@ -103,7 +113,7 @@ public class Player {
         Paint paint = new Paint();
         paint.setColor(Color.RED);
         //canvas.drawRect(x + Cell.WALLSIZE, y + Cell.WALLSIZE, x + Cell.CELLSIZE - Cell.WALLSIZE * 2, y + Cell.CELLSIZE - Cell.WALLSIZE * 2, paint);
-        canvas.drawRect(x + Cell.WALLSIZE, y + Cell.WALLSIZE, x + Cell.CELLSIZE - Cell.WALLSIZE * 2, y + Cell.CELLSIZE - Cell.WALLSIZE * 2, paint);
+        canvas.drawBitmap(playerImage, x + Cell.WALLSIZE - Cell.WALLSIZE, y + Cell.WALLSIZE - Cell.WALLSIZE, paint);
 
     }
 
