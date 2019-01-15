@@ -51,8 +51,7 @@ public class GameActivity extends AppCompatActivity {
 
         setContentView(game);
     }
-
-
+    
     @Override
     protected void onPause() {
         super.onPause();
@@ -72,8 +71,6 @@ public class GameActivity extends AppCompatActivity {
 
         mediaPlayer.stop();
     }
-
-
 
     @Override
     protected void onResume() {
