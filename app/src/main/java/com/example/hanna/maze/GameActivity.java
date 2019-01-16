@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.content.SharedPreferences;
+
 
 public class GameActivity extends AppCompatActivity {
 
@@ -12,6 +14,10 @@ public class GameActivity extends AppCompatActivity {
     private int size, level, seed;
     private MediaPlayer mediaPlayer;
     private Game game;
+
+    private boolean isPaused;
+
+    private int x, y;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +49,42 @@ public class GameActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        Bundle outState = new Bundle();
+        isPaused = true;
 
-        outState.putInt("x", Player.currentCell.getX());
-        outState.putInt("y", Player.currentCell.getY());
+        SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        outState.putInt("seconds", game.getSeconds());
-        outState.putInt("tenSecs", game.getTenSecs());
+        editor.putInt("x", Player.currentCell.getX());
+        editor.putInt("y", Player.currentCell.getY());
 
-        outState.putLong("timer", game.getTimer());
+        editor.putInt("seconds", game.getSeconds());
+        editor.putInt("tenSecs", game.getTenSecs());
 
-        onSaveInstanceState(outState);
+        editor.putLong("timer", game.getTimer());
+
+        editor.commit();
+
         mediaPlayer.stop();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(isPaused){
+            SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+
+            game.setPlayerX(sharedPreferences.getInt("x", 0));
+            game.setPlayerY(sharedPreferences.getInt("y", 0));
+
+            game.setSeconds(sharedPreferences.getInt("seconds", 0));
+            game.setTenSecs(sharedPreferences.getInt("tenSecs", 0));
+
+            game.setTimer(sharedPreferences.getLong("timer", 0));
+        }
+
+    }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -79,7 +108,7 @@ public class GameActivity extends AppCompatActivity {
         game.setPlayerY(savedInstanceState.getInt("y"));
 
         game.setSeconds(savedInstanceState.getInt("seconds"));
-        game.setTenSecs(savedInstanceState.getInt("seconds"));
+        game.setTenSecs(savedInstanceState.getInt("tenSecs"));
 
         game.setTimer(savedInstanceState.getLong("timer"));
         mediaPlayer.start();

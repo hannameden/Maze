@@ -141,15 +141,28 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
     public void startGameActivity(){
+
         Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
         gameIntent.putExtra("size", size);
         gameIntent.putExtra("level", level);
+
+        PendingIntent pendingIntent = TaskStackBuilder.create(this)
+                .addNextIntentWithParentStack(gameIntent)
+                .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
         startActivity(gameIntent);
+
     }
 
     public void startHighscoreActivity(View view) {
 
         Intent hsIntent = new Intent(this, HighscoreActivity.class);
+
+        PendingIntent pendingIntent = TaskStackBuilder.create(this)
+                .addNextIntentWithParentStack(hsIntent)
+                .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
         startActivity(hsIntent);
+
     }
 }
