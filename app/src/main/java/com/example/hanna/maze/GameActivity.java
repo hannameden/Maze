@@ -1,24 +1,38 @@
 package com.example.hanna.maze;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.SharedPreferences;
 
-
+/**
+ * The GameActivity displays the game by settings its content view to a Game object which is
+ * of the type SurfaceView by inheritance.
+ *
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-16
+ */
 public class GameActivity extends AppCompatActivity {
 
     private static final String TAG = "GameActivity";
 
     private int size, level, seed;
-    private MediaPlayer mediaPlayer;
+    //private MediaPlayer mediaPlayer;
     private Game game;
 
     private boolean isPaused;
 
     private int x, y;
 
+    /**
+     * Initializes the seed which is used to create the Maze of the game.
+     * The value of the seed is dependant on the value of the level variable.
+     *
+     * Instantiates a Game object which is set to this Activitys ContentView.
+     *
+     * {@inheritDoc}
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +59,12 @@ public class GameActivity extends AppCompatActivity {
         setContentView(game);
     }
 
+    /**
+     * Sets the isPaused boolean to true.
+     * Saves Game related variables by using SharedPreferences.
+     *
+     * {@inheritDoc}
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -64,9 +84,14 @@ public class GameActivity extends AppCompatActivity {
 
         editor.commit();
 
-        mediaPlayer.stop();
+        //mediaPlayer.stop();
     }
 
+    /**
+     * Loads Game related variables using SharedPreferences, if the Game has been paused.
+     *
+     * {@inheritDoc}
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -86,6 +111,12 @@ public class GameActivity extends AppCompatActivity {
     }
 
 
+    /**
+     *
+     *
+     * @param outState
+     * {@inheritDoc}
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -111,14 +142,14 @@ public class GameActivity extends AppCompatActivity {
         game.setTenSecs(savedInstanceState.getInt("tenSecs"));
 
         game.setTimer(savedInstanceState.getLong("timer"));
-        mediaPlayer.start();
+        //mediaPlayer.start();
 
     }
 
     public void sendToMainActivity() {
         Intent mainIntent = new Intent(this, MainActivity.class);
         startActivity(mainIntent);
-        mediaPlayer.stop();
+        //mediaPlayer.stop();
     }
 
     public int getLevel() {

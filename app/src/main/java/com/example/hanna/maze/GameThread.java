@@ -4,10 +4,10 @@ import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
 /**
- * Used to run the Game loop in the run method.
- * Calling the Game objects, update and draw method 30 times a second.
- *  @author Hanna Medén, Niklas Nordgren
- *  @version 2019-01-16
+ * Used to run the Game loop in the run() method.
+ * Calling the Game objects update and draw method 30 times a second.
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-16
  */
 public class GameThread extends Thread {
 
@@ -22,7 +22,7 @@ public class GameThread extends Thread {
     public static Canvas canvas;
 
     /**
-     * Instantiates the thread.
+     * Instantiates the thread
      * @param surfaceHolder
      * @param game
      */

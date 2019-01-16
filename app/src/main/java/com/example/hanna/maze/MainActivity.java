@@ -179,7 +179,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         gameIntent.putExtra("level", level);
 
         startActivity(gameIntent);
-
     }
 
     /**
@@ -191,6 +190,5 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Intent hsIntent = new Intent(this, HighscoreActivity.class);
 
         startActivity(hsIntent);
-
     }
 }

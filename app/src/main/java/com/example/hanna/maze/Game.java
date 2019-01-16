@@ -20,9 +20,14 @@ import java.util.concurrent.TimeUnit;
 
 /**
  *
- * Used by the GameActivity class 
+ * Used by the GameActivity class as a its ContentView
+ *
+ * Holds all of the necessary objects to create the Maze Game.
  *
  * {@inheritDoc}
+ *
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-16
  */
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -53,6 +58,15 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private long now;
     private long lastTime;
 
+    /**
+     * Instantiates a new Game object that implicitly instantiates all of the necessary objects
+     * to create the Maze game.
+     *
+     * @param context
+     * @param gameActivity
+     * @param size
+     * @param seed
+     */
     public Game(Context context, GameActivity gameActivity, int size, int seed) {
         super(context);
 
@@ -152,6 +166,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
+    /**
+     *  Used to update variables related to the Game object.
+     *  Updates the timer that is displayed onto the screen.
+     */
     public void update() {
 
         now = System.nanoTime();
@@ -188,26 +206,56 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawText(timerString, xTimerPlacement, yTimerPlacement, paint);
     }
 
+    /**
+     *
+     * Gets the time represented as String object
+     *
+     * @return timerString
+     */
     public String getTimerString() {
         return timerString;
     }
 
+    /**
+     * Gets the seconds represented as an Integer.
+     *
+     * @return seconds
+     */
     public int getSeconds() {
         return seconds;
     }
 
+    /**
+     * Gets the tenths represented as an Integer.
+     *
+     * @return tenSecs
+     */
     public int getTenSecs() {
         return tenSecs;
     }
 
+    /**
+     * Sets the seconds of the timer.
+     *
+     * @param seconds
+     */
     public void setSeconds(int seconds) {
         this.seconds = seconds;
     }
 
+    /**
+     * Sets the tenths of the timer.
+     *
+     * @param tenSecs
+     */
     public void setTenSecs(int tenSecs) {
         this.tenSecs = tenSecs;
     }
 
+    /**
+     * Resets the game by re-initializing game related variables
+     * and by calling the methods lockRotation() and countDown().
+     */
     public void resetGame() {
 
         playerX = 0;
@@ -220,6 +268,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         countDown();
     }
 
+    /**
+     * Displays an AlertDialog with a countdown on top of it indicating that the game is about to begin.
+     */
     public void countDown(){
 
         AlertDialog dialog = new AlertDialog.Builder(Game.CURRENT_CONTEXT)
@@ -257,42 +308,80 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         dialog.show();
     }
 
+    /**
+     * Sets the playerX
+     * @param playerX
+     */
     public void setPlayerX(int playerX) {
         this.playerX = playerX;
     }
 
+    /**
+     * Sets the playerY
+     * @param playerY
+     */
     public void setPlayerY(int playerY) {
         this.playerY = playerY;
     }
 
+    /**
+     * Sets running
+     * @param val
+     */
     public void setRunning(boolean val) {
         gameThread.setRunning(val);
     }
 
+    /**
+     * Gets the GameActivity object.
+     * @return gameActivity
+     */
     public GameActivity getGameActivity() {
         return gameActivity;
     }
 
+    /**
+     * Gets the timer.
+     * @return timer
+     */
     public long getTimer() {
         return timer;
     }
 
+    /**
+     * Sets the timer.
+     * @param timer
+     */
     public void setTimer(long timer) {
         this.timer = timer;
     }
 
+    /**
+     * Gets the level.
+     * @return gameActivity objects level
+     */
     public int getLevel(){
         return gameActivity.getLevel();
     }
 
+    /**
+     * Gets the size.
+     * @return size
+     */
     public int getSize(){
         return size;
     }
 
+    /**
+     * Locks the screenorientation to the Game objects currentConfig.
+     */
     public void lockRotation(){
         gameActivity.setRequestedOrientation(Game.currentConfig);
     }
 
+    /**
+     * Unlocks the screenorientation of the Game objects currentConfig.
+     */
     public void unlockRotation(){
         gameActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
