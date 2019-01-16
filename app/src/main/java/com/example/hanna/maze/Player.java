@@ -102,7 +102,6 @@ public class Player {
 
         Paint paint = new Paint();
         paint.setColor(Color.RED);
-        //canvas.drawRect(x + Cell.WALLSIZE, y + Cell.WALLSIZE, x + Cell.CELLSIZE - Cell.WALLSIZE * 2, y + Cell.CELLSIZE - Cell.WALLSIZE * 2, paint);
         canvas.drawRect(x + Cell.WALLSIZE, y + Cell.WALLSIZE, x + Cell.CELLSIZE - Cell.WALLSIZE * 2, y + Cell.CELLSIZE - Cell.WALLSIZE * 2, paint);
 
     }
@@ -125,7 +124,7 @@ public class Player {
         game.setRunning(false);
     }
 
-    public void playerWinsPopup(){
+    public void playerWinsPopup() {
 
         game.lockRotation();
 
@@ -144,7 +143,7 @@ public class Player {
                         playerName = input.getText().toString();
 
                         Log.d(TAG, "name " + playerName);
-                        if(playerName.isEmpty() == true){
+                        if (playerName.isEmpty() == true) {
 
                             AlertDialog.Builder builder3 = new AlertDialog.Builder(Game.CURRENT_CONTEXT);
                             builder3.setTitle("Error")
@@ -159,7 +158,7 @@ public class Player {
                                     .create();
                             builder3.show();
 
-                        }else{
+                        } else {
                             saveResultToDatabase(playerName, Double.parseDouble(playerTime));
                             exitPopup();
                         }
@@ -244,6 +243,7 @@ public class Player {
                     dataIsFetched = true;
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 

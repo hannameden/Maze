@@ -1,11 +1,8 @@
 package com.example.hanna.maze;
 
 import android.app.AlertDialog;
-import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
