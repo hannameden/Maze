@@ -172,12 +172,8 @@ public class Maze {
             for(int y = 0; y < cells[x].length; y++)
                 cells[x][y].drawWalls(canvas);
 
-        paint.setColor(Color.BLUE);
-        startCell.fillCell(canvas, paint);
-
         paint.setColor(Color.GREEN);
-        goalCell.fillCell(canvas, paint);
-
+        startCell.fillCell(canvas, paint);
 
         //Solution test, for future functionality
 	/*	for(int x = 0; x < cells.length; x++)
