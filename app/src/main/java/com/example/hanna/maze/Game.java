@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
@@ -12,7 +11,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.Button;
@@ -20,6 +18,12 @@ import android.widget.Button;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+/**
+ *
+ * Used by the GameActivity class 
+ *
+ * {@inheritDoc}
+ */
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     private static final String TAG = "Game";
@@ -86,6 +90,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         gameThread.start();
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param holder
+     */
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
 
@@ -109,11 +118,24 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         init(size);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param holder
+     * @param format
+     * @param width
+     * @param height
+     */
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param holder
+     */
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         boolean retry = true;
@@ -149,6 +171,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param canvas
+     */
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);

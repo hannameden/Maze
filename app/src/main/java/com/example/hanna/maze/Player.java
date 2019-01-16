@@ -62,7 +62,7 @@ public class Player {
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         BitmapFactory bf = new BitmapFactory();
-        playerImage = bf.decodeResource(game.CURRENT_CONTEXT.getResources(), R.drawable.alienbeige);
+        playerImage = bf.decodeResource(game.CURRENT_CONTEXT.getResources(), R.drawable.alien_green);
 
         playerImage = Bitmap.createScaledBitmap(playerImage, Cell.CELLSIZE - Cell.WALLSIZE, Cell.CELLSIZE - Cell.WALLSIZE, false);
 
@@ -113,7 +113,7 @@ public class Player {
         Paint paint = new Paint();
         paint.setColor(Color.RED);
         //canvas.drawRect(x + Cell.WALLSIZE, y + Cell.WALLSIZE, x + Cell.CELLSIZE - Cell.WALLSIZE * 2, y + Cell.CELLSIZE - Cell.WALLSIZE * 2, paint);
-        canvas.drawBitmap(playerImage, x + Cell.WALLSIZE - Cell.WALLSIZE, y + Cell.WALLSIZE - Cell.WALLSIZE, paint);
+        canvas.drawBitmap(playerImage, x, y, paint);
 
     }
 
