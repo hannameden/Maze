@@ -11,6 +11,8 @@ import static java.security.AccessController.getContext;
  * This class is used by the Maze class to generated the actual Maze in the game.
  * The actual Maze is implemented as a two dimensional array of Cell objects.
  *
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-16
  */
 public class Cell {
 

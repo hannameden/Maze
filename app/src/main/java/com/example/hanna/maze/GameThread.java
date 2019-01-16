@@ -3,6 +3,13 @@ package com.example.hanna.maze;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
+/**
+ * Used to run the Game loop in the run() method.
+ * Calling the Game objects update and draw method 30 times a second.
+ *
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-16
+ */
 public class GameThread extends Thread {
 
     private static final String TAG = "MainThread";
@@ -15,6 +22,13 @@ public class GameThread extends Thread {
 
     public static Canvas canvas;
 
+    /**
+     *
+     *
+     *
+     * @param surfaceHolder
+     * @param game
+     */
     public GameThread(SurfaceHolder surfaceHolder, Game game){
         super();
         this.surfaceHolder = surfaceHolder;
