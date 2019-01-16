@@ -11,6 +11,11 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+/**
+ * This class handles all the inputs.
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-16
+ */
 public class InputManager implements View.OnTouchListener {
 
     private static final String TAG = "InputManager";
@@ -24,6 +29,9 @@ public class InputManager implements View.OnTouchListener {
 
     private Rect upRect, downRect, leftRect, rightRect;
 
+    /**
+     * Instantiates with a player object.
+     */
     public InputManager(Player player) {
 
         this.player = player;
@@ -57,27 +65,32 @@ public class InputManager implements View.OnTouchListener {
 
     }
 
-
+    /**
+     * Currently not used.
+     */
     public void update() {
 
     }
 
+    /**
+     * Draws the on screen controls.
+     * @param canvas
+     */
     public void render(Canvas canvas) {
 
         canvas.drawRect(upRect, paint);
         canvas.drawRect(downRect, paint);
         canvas.drawRect(leftRect, paint);
         canvas.drawRect(rightRect, paint);
-
-        //paint.setColor(Color.GREEN);
-
-        //canvas.drawCircle(MainActivity.width / 2, MainActivity.height - controllerHeight ,controllerHeight, paint);
-        //canvas.drawCircle(MainActivity.width / 2, MainActivity.height - controllerHeight *5 ,controllerHeight, paint);
-        //canvas.drawCircle(MainActivity.width / 2 + controllerHeight * 2, MainActivity.height - controllerHeight *3 ,controllerHeight, paint);
-        //canvas.drawCircle(MainActivity.width / 2 - controllerHeight * 2, MainActivity.height - controllerHeight *3 ,controllerHeight, paint);
-
     }
 
+    /**
+     * Method for moving the player with the controls.
+     * {@inheritDoc}
+     * @param v
+     * @param event
+     * @return
+     */
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 

@@ -3,11 +3,15 @@ package com.example.hanna.maze;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
+/**
+ * This class is for making and drawing the maze.
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-16
+ */
 public class Maze {
 
     public static Cell[][] cells;
@@ -27,6 +31,11 @@ public class Maze {
 
     private boolean goalIsFound;
 
+    /**
+     * Instantiates a new maze object with size and seed(level).
+     * @param size
+     * @param seed
+     */
     public Maze(int size, int seed) {
         this.mazeHeight = size;
         this.mazeWidth = size;
@@ -159,10 +168,17 @@ public class Maze {
     }
 
 
+    /**
+     * Currently not being used.
+     */
     public void update() {
 
     }
 
+    /**
+     * For painting the walls of the maze.
+     * @param canvas
+     */
     public void render(Canvas canvas) {
 
         Paint paint = new Paint();
@@ -175,7 +191,7 @@ public class Maze {
         paint.setColor(Color.GREEN);
         startCell.fillCell(canvas, paint);
 
-        //Solution test, for future functionality
+        //Solution, for future functionality
 	/*	for(int x = 0; x < cells.length; x++)
 			for(int y = 0; y < cells[x].length; y++) {
 				if(cells[x][y].isSolution()) {

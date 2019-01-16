@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+
 public class HighscoreListAdapter extends RecyclerView.Adapter<HighscoreListAdapter.ViewHolder> {
 
     private List<Highscore> list;

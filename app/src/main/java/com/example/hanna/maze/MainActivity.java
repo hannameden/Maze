@@ -18,6 +18,11 @@ import android.widget.Spinner;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This is the start of our programme. Where we start the game.
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-16
+ */
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static final String TAG = "MainActivity";
@@ -34,6 +39,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private LinearLayout linearLayout;
 
+    /**
+     * {@inheritDoc}
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,16 +82,35 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         spinnerLevel.setAdapter(adapter2);
     }
 
+    /**
+     * Currently not being used.
+     * {@inheritDoc}
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
     }
 
+    /**
+     * Currently not being used.
+     * {@inheritDoc}
+     * @param parent
+     */
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
 
+    /**
+     * Method for what happens when you press the Start button.
+     * It extracts and sets the size and level of the maze and starts
+     * the countdown timer.
+     * @param v
+     */
     public void startGame(View v) {
 
         String stringSize = spinnerSize.getSelectedItem().toString();
@@ -101,6 +129,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
+    /**
+     * This starts a timer of 3 seconds in the form of a popup, when finished,
+     * it starts the game.
+     */
     public void countDown(){
 
         AlertDialog dialog = new AlertDialog.Builder(this)
@@ -131,36 +163,32 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             dialog.dismiss();
                         }
                     }
-
-
-
                 }.start();
             }
         });
         dialog.show();
-
     }
+
+    /**
+     * A method for starting the GameActivity.
+     */
     public void startGameActivity(){
 
         Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
         gameIntent.putExtra("size", size);
         gameIntent.putExtra("level", level);
 
-        PendingIntent pendingIntent = TaskStackBuilder.create(this)
-                .addNextIntentWithParentStack(gameIntent)
-                .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-
         startActivity(gameIntent);
 
     }
 
+    /**
+     * A method for starting the HigscoreActivity.
+     * @param view
+     */
     public void startHighscoreActivity(View view) {
 
         Intent hsIntent = new Intent(this, HighscoreActivity.class);
-
-        PendingIntent pendingIntent = TaskStackBuilder.create(this)
-                .addNextIntentWithParentStack(hsIntent)
-                .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
         startActivity(hsIntent);
 

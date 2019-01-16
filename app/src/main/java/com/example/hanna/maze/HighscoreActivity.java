@@ -1,29 +1,28 @@
 package com.example.hanna.maze;
 
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is an Activity for the Highscore.
+ * @author Hanna Medén, Niklas Nordgren
+ * @version 2019-01-16
+ */
 public class HighscoreActivity extends AppCompatActivity {
-
-    private static final String TAG = "HighscoreActivity";
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -43,6 +42,10 @@ public class HighscoreActivity extends AppCompatActivity {
     private Button buttonLevel1, buttonLevel2, buttonLevel3;
     private Button button5x5, button10x10, button15x15;
 
+    /**
+     * {@inheritDoc}
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,8 +92,6 @@ public class HighscoreActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        //writeToDatabase();
-
         listData = new ArrayList<>();
 
         databaseReference.addValueEventListener(valueEventListener = new ValueEventListener() {
@@ -105,7 +106,6 @@ public class HighscoreActivity extends AppCompatActivity {
 
                     listData.add(new Highscore(playerRank, playerName, playerTime));
                 }
-
                 adapter.notifyDataSetChanged();
 
                 buttonLevel1.setClickable(true);
@@ -128,12 +128,14 @@ public class HighscoreActivity extends AppCompatActivity {
             }
         });
 
-
         adapter = new HighscoreListAdapter(listData);
         recyclerView.setAdapter(adapter);
-
     }
 
+    /**
+     * If level 1 is chosen.
+     * @param v
+     */
     public void onClickButtonLevel1(View v){
 
         isButtonLevel1Pressed = true;
@@ -147,6 +149,10 @@ public class HighscoreActivity extends AppCompatActivity {
         readFromDatabase();
     }
 
+    /**
+     * If level 2 is chosen.
+     * @param v
+     */
     public void onClickButtonLevel2(View v){
 
         isButtonLevel1Pressed = false;
@@ -160,6 +166,10 @@ public class HighscoreActivity extends AppCompatActivity {
         readFromDatabase();
     }
 
+    /**
+     * If level 3 is chosen.
+     * @param v
+     */
     public void onClickButtonLevel3(View v){
 
         isButtonLevel1Pressed = false;
@@ -173,6 +183,10 @@ public class HighscoreActivity extends AppCompatActivity {
         readFromDatabase();
     }
 
+    /**
+     * If size 5x5 is chosen.
+     * @param v
+     */
     public void onClickButton5x5(View v){
 
         isButton5x5Pressed = true;
@@ -186,6 +200,10 @@ public class HighscoreActivity extends AppCompatActivity {
         readFromDatabase();
     }
 
+    /**
+     * If size 10x10 is chosen.
+     * @param v
+     */
     public void onClickButton10x10(View v){
 
         isButton5x5Pressed = false;
@@ -199,6 +217,10 @@ public class HighscoreActivity extends AppCompatActivity {
         readFromDatabase();
     }
 
+    /**
+     * If size 15x15 is chosen.
+     * @param v
+     */
     public void onClickButton15x15(View v){
 
         isButton5x5Pressed = false;

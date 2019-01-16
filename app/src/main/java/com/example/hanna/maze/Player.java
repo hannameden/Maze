@@ -8,22 +8,22 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
-import android.support.constraint.solver.widgets.Rectangle;
 import android.text.InputType;
-import android.util.Log;
 import android.widget.EditText;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 
+/**
+ * This class is used to create and move the player, it also keeps track
+ * if the player reaches the goal. It also writes to the database.
+ *  @author Hanna Medén, Niklas Nordgren
+ *  @version 2019-01-16
+ */
 public class Player {
-
-    private static final String TAG = "Player";
 
     private Game game;
 
@@ -48,11 +48,15 @@ public class Player {
 
     private Bitmap playerImage;
 
+    /**
+     * Takes in a Game object and the coordinates for where in the maze it is.
+     * @param game
+     * @param playerX
+     * @param playerY
+     */
     public Player(Game game, int playerX, int playerY) {
 
         this.game = game;
-
-        Log.d(TAG, "Player: " + x + " " + y);
 
         this.x = Maze.cells[playerX][playerY].getxPixels() + Cell.WALLSIZE;
         this.y = Maze.cells[playerX][playerY].getyPixels() + Cell.WALLSIZE;
@@ -63,16 +67,20 @@ public class Player {
 
         BitmapFactory bf = new BitmapFactory();
         playerImage = bf.decodeResource(game.CURRENT_CONTEXT.getResources(), R.drawable.alien_green);
-
         playerImage = Bitmap.createScaledBitmap(playerImage, Cell.CELLSIZE - Cell.WALLSIZE, Cell.CELLSIZE - Cell.WALLSIZE, false);
 
-
     }
 
+    /**
+     * Currently we don't use this method, but intend to do it for smoother
+     * player movement.
+     */
     public void update() {
-
     }
 
+    /**
+     * When the player moves left.
+     */
     public void moveLeft() {
 
         if (x > 0 && currentCell.walls[2] != 1) {
@@ -81,7 +89,9 @@ public class Player {
         }
 
     }
-
+    /**
+     * When the player moves down.
+     */
     public void moveDown() {
 
         if (currentCell.walls[1] != 1) {
@@ -91,6 +101,9 @@ public class Player {
         }
     }
 
+    /**
+     * When the player moves up.
+     */
     public void moveUp() {
 
         if (y > 0 && currentCell.walls[0] != 1) {
@@ -99,6 +112,9 @@ public class Player {
         }
     }
 
+    /**
+     * When the player moves right.
+     */
     public void moveRight() {
 
         if (currentCell.walls[3] != 1) {
@@ -108,15 +124,20 @@ public class Player {
         }
     }
 
+    /**
+     * For when we draw the player.
+     * @param canvas
+     */
     public void render(Canvas canvas) {
 
         Paint paint = new Paint();
         paint.setColor(Color.RED);
-       canvas.drawBitmap(playerImage, x, y, paint);
-
-
+        canvas.drawBitmap(playerImage, x, y, paint);
     }
 
+    /**
+     * Checks if the player has found the goal.
+     */
     public void checkIfGoalIsReached() {
 
         if (currentCell == Maze.cells[Maze.cells.length - 1][Maze.cells[0].length - 1] && !goalIsFound) {
@@ -126,6 +147,9 @@ public class Player {
 
     }
 
+    /**
+     * Method for when the player finds the goal. Saves the time and starts a popup.
+     */
     public void playerWins() {
 
         playerTime = game.getTimerString();
@@ -135,6 +159,10 @@ public class Player {
         game.setRunning(false);
     }
 
+    /**
+     * A popup for when the player has reached the goal. The player can write their name
+     * in the textfield to register their time or press cancel.
+     */
     public void playerWinsPopup() {
 
         game.lockRotation();
@@ -153,7 +181,6 @@ public class Player {
 
                         playerName = input.getText().toString();
 
-                        Log.d(TAG, "name " + playerName);
                         if (playerName.isEmpty() == true) {
 
                             AlertDialog.Builder builder3 = new AlertDialog.Builder(Game.CURRENT_CONTEXT);
@@ -185,6 +212,10 @@ public class Player {
         builder.show();
     }
 
+    /**
+     * A method for the exit popup, choice between
+     * go to the menu or restart the level.
+     */
     public void exitPopup() {
 
         AlertDialog.Builder builder2 = new AlertDialog.Builder(Game.CURRENT_CONTEXT);
@@ -204,9 +235,13 @@ public class Player {
             }
         });
         builder2.show();
-
     }
 
+    /**
+     * Currently not used but it is for setting the currentcell.
+     * @param x
+     * @param y
+     */
     public static void setCurrentCell(int x, int y) {
         currentCell = Maze.cells[x][y];
     }
@@ -254,13 +289,10 @@ public class Player {
                     dataIsFetched = true;
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
-
     }
 
     private void insertNewHighscoreInDb(Highscore newHighscore, ArrayList<Highscore> currentHighscoreResults) {
@@ -275,7 +307,6 @@ public class Player {
                 inserted = true;
             }
         }
-
         if (!inserted)
             currentHighscoreResults.add(newHighscore);
 
@@ -284,5 +315,4 @@ public class Player {
             databaseReference.child("highscore").child(sizeString).child(levelString).child(Integer.toString(i + 1)).setValue(highscore);
         }
     }
-
 }
